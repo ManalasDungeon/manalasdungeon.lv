@@ -30,3 +30,22 @@ error_log
 tests/node_modules/
 tests/output/
 tests/baseline/
+
+# --- Vanhat, käytöstä poistuneet tiedostot (säilytetään vain omalla koneella) ---
+_arkisto/
+
+# --- Työtiedostot: blogikuvien lähdekuvat, sisällön tuontiskriptit, sisäiset dokumentit ---
+/paivitys*.jpg
+/mezupes_koirat.jpg
+/info_bg.jpg
+/blogi_bg.jpg
+/gb_banner_bottom.jpg
+/samhain_candle.jpg
+*.docx
+/aloitus_celojums.sql
+/ensimmainen_zina.sql
+/zina_02_talvikausi.sql
+/paivitys_*.sql
+/dokumentaatio.html
+/dokumentaatio.css
+/DOKUMENTAATIO_*.md
