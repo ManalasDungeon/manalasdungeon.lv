@@ -176,6 +176,8 @@ The tests copy the site to a temporary folder and use their own MariaDB/MySQL te
 
 The site runs on shared cPanel hosting (LiteSpeed, PHP 8.4). Files are uploaded to the web root; the root `.htaccess` handles HTTPS, clean URLs, caching, gzip and hotlink protection. The Vitrupe site has its own `.htaccess` in `vitrupe/`, because rewrite rules in a subfolder do not inherit from the parent.
 
+**Deploying from GitHub (cPanel Git Version Control):** the repository is cloned to `~/repositories/manalasdungeon.lv`. *Update from Remote* fetches the latest commit and *Deploy HEAD Commit* runs `.cpanel.yml`, which copies the site files to `public_html` with `rsync` — without deleting anything, so server-only files (`db_config.php`, `passkey/config.php`, uploaded images) stay in place. Tests, GitHub settings, SQL scripts and docs are not copied to the web root, and the backup script goes to `~/varmuuskopio/`.
+
 **Never commit or upload to a public place:** `db_config.php`, `passkey/config.php` (setup token) or diagnostic scripts. See `.gitignore`.
 
 ## Author
