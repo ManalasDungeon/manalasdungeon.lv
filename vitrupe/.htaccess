@@ -1,0 +1,31 @@
+# =========================================================================
+# manalasdungeon.lv/vitrupe/ — .htaccess
+# Siistit kieliosoitteet + pakotettu HTTPS.
+# =========================================================================
+
+RewriteEngine On
+RewriteBase /vitrupe/
+
+# 0) Pakota HTTPS + ei-www.
+
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://manalasdungeon.lv%{REQUEST_URI} [R=301,L]
+
+# 1) Kieliprefiksin (en/fi) alla pyydetyt kuvat/tyylit/skriptit oikeisiin kansioihin
+RewriteRule ^(en|fi)/(images|css|js|audio)/(.+)$ $2/$3 [L]
+
+# 2) Kieliprefiksilla varustettu etusivu:  /en/  ->  index.php?lang=en
+RewriteRule ^(en|fi)/?$ index.php?lang=$1 [L,QSA]
+
+# 3) Kieliprefiksilla varustetut sivut:  /en/kuvat.php  ->  kuvat.php?lang=en
+#    (kattaa automaattisesti kuvat.php, kuvat2.php, kuvat3.php, kaikki uudet .php-sivut)
+RewriteRule ^(en|fi)/([A-Za-z0-9_-]+\.php)$ $2?lang=$1 [L,QSA]
+
+# 4) Vanhat .html-galleriaosoitteet uusiin .php-sivuihin (SEO: 301)
+Redirect 301 /vitrupe/kuvat.html   /vitrupe/kuvat.php
+Redirect 301 /vitrupe/kuvat2.html  /vitrupe/kuvat2.php
+Redirect 301 /vitrupe/kuvat3.html  /vitrupe/kuvat3.php
+
+# Hakemiston oletussivu
+DirectoryIndex index.php index.html

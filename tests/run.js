@@ -123,8 +123,12 @@ async function waitForServer() {
 
 /* ---------- 5. Sivutestit ---------- */
 const PHP_ERR = /(<b>)?(Warning|Notice|Deprecated|Fatal error|Parse error|Uncaught)(<\/b>)?:\s/;
-function urlFor(p, lang) {
+function urlFor(p, lang, page) {
   if (lang === 'lv') return p;
+  if (page && page.langPrefix) {                    // Vitrupe: /vitrupe/en/kuvat.php (siistit kieliosoitteet)
+    const base = page.langPrefix;                   // esim. '/vitrupe/'
+    return base + lang + '/' + p.slice(base.length);
+  }
   return p + (p.includes('?') ? '&' : '?') + 'lang=' + lang;
 }
 
@@ -149,7 +153,7 @@ async function checkPage(browser, page, lang, vpName, vp, linkSet) {
 
   const problems = [];
   let resp;
-  try { resp = await tab.goto(ORIGIN + urlFor(page.path, lang), { waitUntil: 'load', timeout: 20000 }); }
+  try { resp = await tab.goto(ORIGIN + urlFor(page.path, lang, page), { waitUntil: 'load', timeout: 20000 }); }
   catch (e) { rec('sivut', label, false, 'ei latautunut: ' + e.message); await ctx.close(); return; }
   if (!resp || resp.status() !== 200) problems.push('HTTP ' + (resp && resp.status()));
 
@@ -183,7 +187,7 @@ async function checkPage(browser, page, lang, vpName, vp, linkSet) {
   if (page.h1 !== false && info.h1 !== 1) problems.push(`h1-otsikoita ${info.h1} (pitäisi olla 1)`);
   if (!page.noindex) {
     if (!info.canonical.startsWith('https://manalasdungeon.lv/')) problems.push('canonical puuttuu tai väärä: ' + info.canonical);
-    else if (lang !== 'lv' && !info.canonical.includes('lang=' + lang)) problems.push('canonical ei ole kieliversion: ' + info.canonical);
+    else if (lang !== 'lv' && !info.canonical.includes(page.langPrefix ? page.langPrefix + lang + '/' : 'lang=' + lang)) problems.push('canonical ei ole kieliversion: ' + info.canonical);
     for (const l of ['lv', 'en', 'fi', 'x-default']) if (!info.hreflang.includes(l)) problems.push('hreflang puuttuu: ' + l);
   }
   if (info.overflow > 1) problems.push(`vaakasuuntainen ylivuoto ${info.overflow}px`);

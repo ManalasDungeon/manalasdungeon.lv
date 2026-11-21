@@ -6,11 +6,11 @@
 #  - EI --delete-valitsinta: palvelimen omat tiedostot (db_config.php, passkey/config.php,
 #    main.js, app.js, date_time.js, kuvat, blogi_kuvat/) jäävät koskematta.
 #  - Testit, GitHub-asetukset, SQL-skriptit ja ohjeet eivät mene verkkojuureen.
-#  - vitrupe/ ja kirjasto/ jätetään pois: palvelimen versiot ovat ajantasaisempia kuin repon kopiot.
+#  - kirjasto/ jätetään pois: palvelimen versio on ajantasaisempi kuin repon kopio.
 #  - Varmuuskopioskripti menee kotikansioon verkkojuuren ulkopuolelle.
 deployment:
   tasks:
     - export DEPLOYPATH=/home/manalasd/public_html/
-    - /usr/bin/rsync -rlt --exclude='.git' --exclude='.github' --exclude='.cpanel.yml' --exclude='.gitignore' --exclude='tests/' --exclude='varmuuskopio/' --exclude='vitrupe/' --exclude='kirjasto/' --exclude='*.sql' --exclude='*.md' --exclude='*.example.php' ./ $DEPLOYPATH
+    - /usr/bin/rsync -rlt --exclude='.git' --exclude='.github' --exclude='.cpanel.yml' --exclude='.gitignore' --exclude='tests/' --exclude='varmuuskopio/' --exclude='kirjasto/' --exclude='*.sql' --exclude='*.md' --exclude='*.example.php' ./ $DEPLOYPATH
     - /bin/mkdir -p /home/manalasd/varmuuskopio
     - /bin/cp varmuuskopio/varmuuskopio.php /home/manalasd/varmuuskopio/varmuuskopio.php

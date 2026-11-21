@@ -1,0 +1,129 @@
+/* ============================================================
+   Galerija — Vitrupes Pludmale (latvialainen teema)
+   Moderni responsiivinen ruudukko + lightbox-katselu.
+   Käyttää latviatyyli.css:n :root-muuttujia (varmuuskopiot mukana).
+   ============================================================ */
+
+.gallery-wrap { padding: 0; }
+
+/* Justified/masonry-ruudukko: kuvat eri korkuisina, rivit täyttyvät siistiksi.
+   Toteutettu CSS-sarakkeilla (ei JS:ää), responsiivinen. */
+.gallery-grid {
+  column-count: 3;
+  column-gap: 1.2rem;
+}
+@media (max-width: 900px) { .gallery-grid { column-count: 2; } }
+@media (max-width: 560px) { .gallery-grid { column-count: 1; } }
+
+.gallery {
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  width: 100%;
+  margin: 0 0 1.2rem;
+  background: #fff;
+  border: 1px solid var(--lv-line, #E6DCCB);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 22px rgba(43, 33, 28, .06);
+  transition: transform .22s, box-shadow .22s;
+}
+.gallery:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 36px rgba(43, 33, 28, .16);
+}
+.gallery__media { overflow: hidden; }
+.gallery__media img {
+  width: 100%;
+  height: auto;
+  display: block;
+  cursor: zoom-in;
+  transition: transform .5s ease;
+}
+.gallery:hover .gallery__media img { transform: scale(1.06); }
+.gallery .desc {
+  padding: .8rem 1rem;
+  text-align: center;
+  font-size: .9rem;
+  color: #4A3D34;
+  background: var(--lv-linen, #F5EEE2);
+  border-top: 2px solid var(--lv-amber, #C08A2E);
+}
+
+/* Upotukset: kartta + video */
+.embed-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.2rem;
+}
+.embed-grid .lv-embed iframe { width: 100%; min-height: 320px; }
+
+/* Kun upotuksia on vain yksi (esim. pelkkä kartta) — keskitä ja rajaa leveys */
+.embed-grid--single { grid-template-columns: minmax(0, 680px); justify-content: center; }
+.embed-grid--single .lv-embed iframe { min-height: 380px; }
+
+/* Lightbox-katseluikkuna (korvaa vanhan popup-ikkunan) */
+.lightbox {
+  position: fixed; inset: 0; z-index: 1080;
+  display: none; align-items: center; justify-content: center;
+  background: rgba(43, 20, 16, .88);
+  padding: 24px; cursor: zoom-out;
+  touch-action: none;            /* estää selaimen oman eleen -> pyyhkäisy toimii */
+}
+.lightbox.open { display: flex; }
+.lightbox img {
+  max-width: 92vw; max-height: 84vh;
+  border-radius: 10px;
+  border: 3px solid var(--lv-amber, #C08A2E);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .5);
+  touch-action: none;
+}
+.lightbox__caption {
+  position: absolute; bottom: 22px; left: 0; right: 0;
+  text-align: center; color: #fff; font-size: 1rem; padding: 0 20px;
+}
+.lightbox__close {
+  background: none; border: 0; padding: 4px 8px;
+  position: absolute; top: 14px; right: 26px;
+  color: #fff; font-size: 2.4rem; line-height: 1;
+  cursor: pointer; font-family: sans-serif; user-select: none;
+}
+.lightbox__close:hover { color: var(--lv-amber-light, #E4C77A); }
+
+/* Lightboxin edellinen/seuraava-nuolet */
+.lightbox__nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  z-index: 2;
+  width: 54px; height: 54px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(20, 10, 8, .45); color: #fff;
+  border: 1px solid rgba(255, 255, 255, .35);
+  font-size: 2rem; line-height: 1; font-family: sans-serif;
+  cursor: pointer; user-select: none;
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  transition: background .2s, border-color .2s, transform .2s;
+}
+.lightbox__nav:hover {
+  background: var(--lv-amber, #C08A2E);
+  border-color: var(--lv-amber-light, #E4C77A);
+}
+.lightbox__nav--prev { left: 18px; }
+.lightbox__nav--next { right: 18px; }
+.lightbox__nav--prev:hover { transform: translateY(-50%) translateX(-2px); }
+.lightbox__nav--next:hover { transform: translateY(-50%) translateX(2px); }
+@media (max-width: 560px) {
+  .lightbox__nav { width: 44px; height: 44px; font-size: 1.6rem; }
+  .lightbox__nav--prev { left: 8px; }
+  .lightbox__nav--next { right: 8px; }
+}
+
+.clearfix:after { content: ""; display: table; clear: both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery { transition: none; }
+}
+
+/* Näppäimistökäyttö: galleriakuvan ja lightboxin painikkeiden kohdistus näkyy */
+.gallery__media img { cursor: zoom-in; }
+.gallery__media img:focus-visible,
+.lightbox__close:focus-visible,
+.lightbox__nav:focus-visible { outline: 3px solid var(--lv-amber-light, #E4C77A); outline-offset: 3px; }

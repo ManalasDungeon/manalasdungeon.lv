@@ -3,6 +3,7 @@
  *  db          tarvitsee tietokannan (ohitetaan, jos testitietokantaa ei ole)
  *  noindex     ei vaadita canonical- eikä hreflang-merkintöjä
  *  langs       false = testataan vain oletuskielellä
+ *  langPrefix  kieliversiot polkuna (esim. /vitrupe/en/) eikä ?lang=-parametrina
  *  visual      false = ei kuvavertailua (satunnaisia animaatioita, esim. konfetti)
  *  h1          false = aloitussivu ilman h1-otsikkoa
  *  contains    tekstit, joiden pitää näkyä sivulla (oletuskielellä)
@@ -28,6 +29,10 @@ module.exports = {
     { name: 'palaute',     path: '/palaute.php', noindex: true },
     { name: 'latvija18',   path: '/?lv18preview=1', noindex: true, langs: false, visual: false },
     { name: 'samhain',     path: '/samhain.php',    noindex: true, langs: false, visual: false, h1: false },
+    { name: 'vitrupe',         path: '/vitrupe/',          langPrefix: '/vitrupe/', visual: false },
+    { name: 'vitrupe-galleria', path: '/vitrupe/kuvat.php', langPrefix: '/vitrupe/' },
+    { name: 'vitrupe-galleria2', path: '/vitrupe/kuvat2.php', langPrefix: '/vitrupe/' },
+    { name: 'vitrupe-galleria3', path: '/vitrupe/kuvat3.php', langPrefix: '/vitrupe/' },
     { name: 'passkey-kirjautuminen', path: '/passkey/login.php', noindex: true, langs: false, visual: false },
   ],
   /* Ylläpitosivujen pitää ohjata kirjautumiseen ilman passkeytä */
