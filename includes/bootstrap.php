@@ -82,6 +82,20 @@ function head_analytics(string $indent = '    '): string
     return '<script src="/' . h(asset('analytics.js')) . '"></script>' . "\n";
 }
 
+/** Ylläpidon sähköpostiosoite (palautteet ja vieraskirjan ilmoitukset).
+ *  Osoite on palvelimen mail_config.php-tiedostossa, ei versionhallinnassa (julkinen repo).
+ *  Palauttaa tyhjän merkkijonon, jos tiedostoa ei ole tai osoite ei kelpaa. */
+function admin_mail(): string
+{
+    static $to = null;
+    if ($to === null) {
+        $file = SITE_ROOT . '/mail_config.php';
+        $cfg  = is_file($file) ? (require $file) : [];
+        $to   = (is_array($cfg) && filter_var($cfg['to'] ?? '', FILTER_VALIDATE_EMAIL)) ? (string)$cfg['to'] : '';
+    }
+    return $to;
+}
+
 /** Satunnainen tunniste (nonce) tämän sivunlatauksen inline-skripteille. */
 function csp_nonce(): string
 {

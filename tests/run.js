@@ -56,12 +56,14 @@ function makeSiteCopy() {
       if (/\.(zip|mp4|webm)$|_esikatselu/.test(rel)) return false;
       if (rel === 'db_config.php') return false;           // oikeaa yhteyttä ei koskaan testeihin
       if (rel === path.join('passkey', 'config.php')) return false;   // eikä oikeaa asennusavainta
+      if (rel === 'mail_config.php') return false;                    // eikä oikeaa sähköpostiosoitetta
       return true;
     },
   });
   if (process.env.TEST_OVERLAY) fs.cpSync(process.env.TEST_OVERLAY, site, { recursive: true, dereference: true });
   // Passkeyn testiasetukset (oikea config.php ei ole versionhallinnassa eikä testikopiossa)
   fs.copyFileSync(path.join(FIX, 'passkey_config.test.php'), path.join(site, 'passkey', 'config.php'));
+  fs.copyFileSync(path.join(FIX, 'mail_config.test.php'), path.join(site, 'mail_config.php'));
   return { tmp, site };
 }
 

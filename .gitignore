@@ -1,5 +1,6 @@
 # --- Salaisuudet: EI KOSKAAN versionhallintaan ---
 db_config.php
+mail_config.php
 passkey/config.php
 
 # --- Diagnostiikka- ja testiskriptit (poista myös palvelimelta käytön jälkeen) ---

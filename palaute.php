@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/includes/bootstrap.php';   // yhteiset apufunktiot, kieli, <head>-palat
 
-const PALAUTE_TO     = 'marko.nakari@manalasdungeon.lv';   // sama postilaatikko kuin vieraskirjan ilmoituksilla
+// Vastaanottaja: admin_mail() lukee osoitteen palvelimen mail_config.php-tiedostosta (sama kuin vieraskirjan ilmoituksilla)
 const PALAUTE_FROM   = 'noreply@manalasdungeon.lv';
 const MIN_SECONDS    = 3;      // lomakkeen avaamisesta lähetykseen vähintään
 const IP_GAP         = 60;     // sama IP: vähintään 60 s viestien välillä
@@ -167,7 +167,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $headers .= "Content-Transfer-Encoding: 8bit\r\n";
             $headers .= "X-Mailer: manalasdungeon.lv\r\n";
 
-            $ok = @mail(PALAUTE_TO, enc_header('Komentārs no manalasdungeon.lv — ' . $name),
+            $to = admin_mail();
+            $ok = $to !== '' && @mail($to, enc_header('Komentārs no manalasdungeon.lv — ' . $name),
                         $body, $headers, '-f' . PALAUTE_FROM);
             if ($ok) {
                 $sent = true;

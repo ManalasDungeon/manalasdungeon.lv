@@ -13,7 +13,7 @@ session_start();
 /* =====================================================================
  *  Sähköposti-ilmoitus uudesta vieraskirjaviestistä. (Admin-posti latviaksi.)
  * ===================================================================== */
-const GB_NOTIFY_TO   = 'marko.nakari@manalasdungeon.lv';
+// Ilmoitusten vastaanottaja: admin_mail() (palvelimen mail_config.php)
 const GB_NOTIFY_FROM = 'noreply@manalasdungeon.lv';
 
 /* ---- Kieli ---- */
@@ -194,7 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mailHeaders .= "Content-Type: text/plain; charset=UTF-8\r\n";
             $mailHeaders .= "X-Mailer: PHP\r\n";
 
-            @mail(GB_NOTIFY_TO, $mailSubject, $mailBody, $mailHeaders, '-f' . GB_NOTIFY_FROM);
+            if (admin_mail() !== '') @mail(admin_mail(), $mailSubject, $mailBody, $mailHeaders, '-f' . GB_NOTIFY_FROM);
         }
     }
 }
