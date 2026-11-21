@@ -2,7 +2,7 @@ import re, os, shutil, json
 NM='node_modules'
 HERE=os.path.dirname(os.path.abspath(__file__))
 OUT=HERE                                   # fonts/-kansio
-# Käyttö: npm i @fontsource-variable/{playfair-display,nunito-sans,eb-garamond,lora,jetbrains-mono} @fontsource/{great-vibes,poppins}
+# Käyttö: npm i @fontsource-variable/{playfair-display,nunito-sans,eb-garamond,lora,jetbrains-mono,cinzel} @fontsource/{great-vibes,poppins,cinzel-decorative}
 #        python3 fonts/build_fonts.py   (ajetaan kansiossa, jossa node_modules on)
 os.makedirs(OUT, exist_ok=True); os.makedirs(OUT+'/licenses', exist_ok=True)
 # (paketti, css-tiedostot, nimi sivuston CSS:ssä)
@@ -14,6 +14,9 @@ SPEC=[
  ('@fontsource-variable/jetbrains-mono',   ['wght.css'],                   'JetBrains Mono'),
  ('@fontsource/great-vibes',               ['400.css'],                    'Great Vibes'),
  ('@fontsource/poppins',                   ['300.css','400.css'],          'Poppins'),
+ # Verkkokirjasto (/verkkokirjasto/)
+ ('@fontsource-variable/cinzel',           ['wght.css'],                   'Cinzel'),
+ ('@fontsource/cinzel-decorative',         ['700.css'],                    'Cinzel Decorative'),
 ]
 blocks=[]; total=0; files=[]
 for pkg, cssfiles, fam in SPEC:
