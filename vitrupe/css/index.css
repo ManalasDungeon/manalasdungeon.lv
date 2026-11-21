@@ -288,3 +288,17 @@ h1, h2, h3, h4 { font-family: 'Playfair Display', Georgia, serif; color: var(--l
 .lv-eyebrow { color: #8A5E14; }
 .lv-eyebrow--light { color: var(--lv-amber-light); }
 .lv-pager__count { color: #8A5E14; }
+
+/* Saavutettavuus ja luettavuus:
+   - tumma pohjaväri heron alle: valkoinen teksti on luettavaa jo ennen kuvan latautumista
+   - navipalkin taakse kevyt varjoliuku vaaleiden kuvien päällä
+   - vähennetty liike: siirtymät ja reveal-animaatiot pois (käyttöjärjestelmän asetus) */
+.lv-hero-full { background-color: #2B1A14; }
+.lv-nav-overlay:not(.is-solid)::before {
+  content: ''; position: absolute; inset: 0 0 -24px 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(rgba(20, 10, 8, .45), rgba(20, 10, 8, 0));
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+  .reveal { opacity: 1; transform: none; }
+}
