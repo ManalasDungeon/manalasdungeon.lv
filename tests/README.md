@@ -79,7 +79,7 @@ tests/
 ## GitHub Actions
 
 `.github/workflows/testit.yml` ajaa testit automaattisesti jokaisen päivityksen (push) ja pull requestin yhteydessä:
-oma MariaDB-palvelu, PHP 8.4, Node 20 ja Chromium. Kuvavertailu jätetään siellä pois (`--no-visual`), koska fontit
+oma MariaDB-palvelu, PHP 8.4, Node 24 ja Chromium. Kuvavertailu jätetään siellä pois (`--no-visual`), koska fontit
 piirtyvät eri koneilla hieman eri tavoin; kuvavertailu ajetaan paikallisesti omilla pohjakuvilla.
 Jos testi epäonnistuu, raportti tallentuu ajon liitteeksi (Artifacts → testitulokset).
 

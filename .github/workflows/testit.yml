@@ -37,7 +37,7 @@ jobs:
 
     steps:
       - name: Hae koodi
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: PHP 8.4
         uses: shivammathur/setup-php@v2
@@ -46,10 +46,10 @@ jobs:
           extensions: pdo_mysql, mbstring, openssl, gd
           coverage: none
 
-      - name: Node.js 20
-        uses: actions/setup-node@v4
+      - name: Node.js 24
+        uses: actions/setup-node@v7
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Asenna testien riippuvuudet
         working-directory: tests
@@ -68,7 +68,7 @@ jobs:
 
       - name: Tallenna testien tulosteet virhetilanteessa
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: testitulokset
           path: tests/output/
