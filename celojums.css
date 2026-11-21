@@ -1,0 +1,181 @@
+/* ============================================================
+   Ceļojums pa Latviju — matkablogin tyylit.
+   Sama henki kuin blogilla: karmiini + kulta, latvialainen.
+   Tausta: images/celojums_bg.webp (vaihda haluamaasi kuvaan).
+   Fontit: Playfair Display (otsikot) + EB Garamond (teksti).
+   ============================================================ */
+:root{
+  --red:#8d2027; --red-dark:#6f181e;
+  --gold:#e4c56a; --gold-soft:#ffd87a;
+  --cream:#f5ece0; --ink:#2a2626;
+  --card:rgba(26,14,12,0.60);
+  --line:rgba(228,197,106,0.45);
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; min-height:100vh; color:var(--cream);
+  font-family:'EB Garamond','Georgia',serif; font-size:1.08rem; line-height:1.75;
+  background:#160808;
+  padding:0 18px 70px;
+}
+/* Taustakuva omana kiinteänä kerroksena, mitoitettu NÄYTÖN kokoiseksi.
+   Välttää iOS/iPad "fixed-tausta suurenee ja näkyy vain osa" -bugin. */
+body::before{
+  content:''; position:fixed; top:0; left:0; right:0; bottom:0; z-index:-1;
+  background:
+    linear-gradient(rgba(16,8,8,0.32), rgba(16,8,8,0.48)),
+    url('images/celojums_bg.webp') center center / cover no-repeat;
+}
+
+/* Paluulinkki + kielivalitsin (oma GPU-kerros, jotta fixed+blur piirtyy
+   oikein mobiilissa eikä vaadi tuplanapautusta) */
+.cel-back,
+.cel-lang{
+  position:fixed; top:16px; z-index:20;
+  transform:translateZ(0); -webkit-transform:translateZ(0);
+  will-change:transform;
+  -webkit-backface-visibility:hidden; backface-visibility:hidden;
+}
+.cel-back{
+  left:16px; display:inline-flex; align-items:center; gap:.4rem;
+  background:rgba(20,10,10,0.55); color:var(--cream); text-decoration:none;
+  font-weight:600; font-size:.92rem; padding:.45rem 1.05rem; border-radius:30px;
+  border:1px solid rgba(255,255,255,.3); backdrop-filter:blur(4px);
+  transition:background .2s;
+}
+.cel-back:hover{ background:var(--red); }
+.cel-lang{ right:16px; display:flex; gap:.15rem; background:rgba(20,10,10,0.55);
+  border:1px solid rgba(255,255,255,.25); border-radius:30px; padding:.2rem; backdrop-filter:blur(4px); }
+.cel-lang a{ color:var(--cream); text-decoration:none; font-weight:700; font-size:.78rem;
+  letter-spacing:.04em; padding:.3rem .6rem; border-radius:20px; opacity:.72; transition:.2s; }
+.cel-lang a:hover{ opacity:1; }
+.cel-lang a.active{ background:var(--red); opacity:1; color:#fff; }
+
+/* Hero */
+.cel-hero{ text-align:center; padding:clamp(4.5rem,11vw,7rem) 0 1.5rem; }
+.cel-eyebrow{ display:inline-block; font-family:'Playfair Display',serif; letter-spacing:.24em;
+  text-transform:uppercase; font-size:clamp(1rem,2.6vw,1.35rem); font-weight:700;
+  color:var(--gold-soft); margin:0 0 .6rem;
+  background:rgba(20,10,10,0.42); border:1px solid rgba(255,255,255,.2);
+  border-radius:30px; padding:.35rem 1.15rem;
+  text-shadow:0 1px 3px rgba(0,0,0,.55), 0 2px 14px rgba(0,0,0,.6); }
+.cel-hero h1{
+  font-family:'Playfair Display',serif; font-weight:700; margin:0;
+  font-size:clamp(2.4rem,6.5vw,4.2rem); color:#fff; letter-spacing:.01em;
+  text-shadow:0 2px 20px rgba(0,0,0,.55);
+}
+.cel-lead{ font-style:italic; color:var(--gold-soft); margin:.4rem 0 0; font-size:1.15rem;
+  text-shadow:0 1px 6px rgba(0,0,0,.6); }
+.cel-region{ display:inline-flex; align-items:center; gap:.5rem; margin:.7rem 0 0;
+  font-size:.98rem; color:var(--cream); letter-spacing:.02em;
+  background:rgba(20,10,10,0.42); border:1px solid rgba(255,255,255,.2);
+  border-radius:30px; padding:.35rem 1rem; text-shadow:0 1px 4px rgba(0,0,0,.6); }
+.cel-pin{ width:8px; height:8px; border-radius:50%; background:var(--gold-soft);
+  box-shadow:0 0 0 3px rgba(255,216,122,.25); flex-shrink:0; }
+/* Novadien vaakunat ornamenttinauhan tilalla (linkit) */
+.cel-vaakunat{ display:flex; justify-content:center; align-items:flex-start;
+  gap:clamp(1.8rem,6vw,3.5rem); margin:1.8rem auto 0; flex-wrap:wrap; }
+.cel-vaakuna{ display:flex; flex-direction:column; align-items:center; gap:.5rem;
+  text-decoration:none; transition:transform .2s; }
+.cel-vaakuna img{ height:clamp(84px,18vw,118px); width:auto; display:block;
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,.55)); }
+.cel-vaakuna-name{ font-family:'Playfair Display',serif; font-size:.82rem;
+  letter-spacing:.1em; text-transform:uppercase; color:var(--gold-soft);
+  text-shadow:0 1px 5px rgba(0,0,0,.7); }
+.cel-vaakuna:hover{ transform:translateY(-4px); }
+.cel-vaakuna:hover .cel-vaakuna-name{ color:#fff; }
+
+/* Matkakortit */
+.cel-wrap{ max-width:760px; margin:1.5rem auto 0; }
+.cel-zina{
+  background:var(--card); border:1px solid rgba(255,255,255,.1);
+  border-left:4px solid var(--gold); border-radius:14px;
+  padding:1.5rem 1.8rem; margin-bottom:1.5rem;
+  box-shadow:0 10px 30px rgba(0,0,0,.35); backdrop-filter:blur(7px);
+}
+.cel-date{ display:inline-block; font-family:'Playfair Display',serif; font-size:.82rem;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--gold-soft); margin-bottom:.4rem; }
+.cel-title{ font-family:'Playfair Display',serif; font-weight:700; color:#fff;
+  font-size:clamp(1.4rem,3vw,1.9rem); margin:0 0 .7rem; line-height:1.2;
+  text-shadow:0 1px 8px rgba(0,0,0,.5); }
+.cel-text{ color:var(--cream); font-size:1.08rem; line-height:1.8;
+  text-shadow:0 1px 3px rgba(0,0,0,.6); }
+.cel-text a{ color:var(--gold-soft); }
+
+.cel-empty{ text-align:center; color:var(--gold-soft); font-style:italic;
+  background:var(--card); border-radius:14px; padding:2rem; max-width:520px; margin:2rem auto;
+  backdrop-filter:blur(7px); }
+
+/* Kuvat tekstin seassa */
+.cel-fig{ margin:1.3rem 0; }
+.cel-fig img{ width:100%; height:auto; display:block; border-radius:10px;
+  border:1px solid rgba(255,255,255,.14); box-shadow:0 8px 24px rgba(0,0,0,.4);
+  cursor:zoom-in; transition:filter .2s; }
+.cel-fig img:hover{ filter:brightness(1.06); }
+
+/* Kuvan suurennus (lightbox) */
+.cel-lightbox{
+  position:fixed; top:0; left:0; right:0; bottom:0; z-index:100;
+  display:none; align-items:center; justify-content:center;
+  background:rgba(10,6,6,.93); padding:20px; cursor:zoom-out;
+  -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px);
+}
+.cel-lightbox.open{ display:flex; }
+.cel-lightbox img{
+  max-width:100%; max-height:100%; width:auto; height:auto;
+  border-radius:8px; box-shadow:0 12px 50px rgba(0,0,0,.7);
+}
+.cel-lightbox__close{
+  position:fixed; top:14px; right:18px; z-index:101;
+  background:rgba(20,10,10,.6); color:#fff; border:1px solid rgba(255,255,255,.35);
+  width:44px; height:44px; border-radius:50%; font-size:1.6rem; line-height:1;
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+}
+.cel-lightbox__close:hover{ background:var(--red); }
+
+/* Footer */
+.cel-footer{ text-align:center; margin-top:2.5rem; color:rgba(245,236,224,.75); font-size:.9rem;
+  text-shadow:0 1px 4px rgba(0,0,0,.6); }
+.cel-footer a{ color:var(--gold-soft); text-decoration:none; }
+.cel-footer a:hover{ text-decoration:underline; }
+
+/* Esiintulo oikealta vasemmalle */
+.reveal{ opacity:0; transform:translateX(55px); transition:opacity .7s ease, transform .7s ease; }
+.reveal.vis{ opacity:1; transform:none; }
+
+@media (max-width:560px){
+  .cel-zina{ padding:1.2rem 1.25rem; }
+  body{ background-attachment:scroll; }
+}
+@media (prefers-reduced-motion: reduce){
+  .reveal{ opacity:1; transform:none; transition:none; }
+  body{ background-attachment:scroll; }
+}
+
+/* Alareunan paluunappi */
+.cel-bottom{ text-align:center; margin-top:2.6rem; }
+.cel-btn{
+  display:inline-flex; align-items:center; gap:.6rem;
+  font-family:'Playfair Display',serif; font-weight:700; font-size:1.12rem;
+  color:#fff; text-decoration:none;
+  background:linear-gradient(135deg,var(--red),var(--red-dark));
+  border:2px solid var(--gold); border-radius:40px; padding:.8rem 2rem;
+  box-shadow:0 8px 22px rgba(141,32,39,.35);
+  transition:transform .2s, box-shadow .2s, border-color .2s;
+}
+.cel-btn:hover{ transform:translateY(-3px); color:#fff;
+  box-shadow:0 14px 30px rgba(141,32,39,.45); border-color:var(--gold-soft); }
+.cel-btn__arrow{ font-size:1.2em; line-height:1; transition:transform .2s; }
+.cel-btn:hover .cel-btn__arrow{ transform:scale(1.15) rotate(-8deg); }
+
+/* Saavutettavuus: alatunnisteen linkki erottuu muustakin kuin väristä */
+.cel-footer a { text-decoration: underline; text-underline-offset: 3px; }
+
+/* Pystysuuntainen näyttö: keskeltä rajattu pystyversio taustasta (sama ulkoasu, pienempi tiedosto) */
+@media (max-aspect-ratio: 3/4){
+  body::before{
+    background:
+      linear-gradient(rgba(16,8,8,0.32), rgba(16,8,8,0.48)),
+      url('images/celojums_bg_m.webp') center center / cover no-repeat;
+  }
+}

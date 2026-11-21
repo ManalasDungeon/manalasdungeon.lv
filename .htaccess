@@ -1,0 +1,91 @@
+# =====================================================================
+#  manalasdungeon.lv — .htaccess
+# =====================================================================
+
+RewriteEngine on
+
+# ----- Kanoninen osoite: pakota HTTPS + ei-www -----
+# Yhdistää www- ja http-versiot yhteen osoitteeseen (https://manalasdungeon.lv).
+
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://manalasdungeon.lv%{REQUEST_URI} [R=301,L]
+
+# ----- Siistit osoitteet -----
+# Linkkisivu: https://manalasdungeon.lv/linkit  (myös /linkit/ ja ?lang=en / ?lang=fi)
+RewriteRule ^linkit/?$ linkit.php [L,QSA]
+
+# Vanha osoite linkit.php → siisti osoite (vain suora pyyntö, ei sisäistä uudelleenkirjoitusta)
+RewriteCond %{THE_REQUEST} \s/linkit\.php[\s?] [NC]
+RewriteRule ^linkit\.php$ https://manalasdungeon.lv/linkit [R=301,L,QSA]
+
+# .html-tiedostot suoritetaan PHP:nä
+AddHandler application/x-httpd-php html
+
+# Oma virhesivu puuttuville sivuille (kolmikielinen, palauttaa tilakoodin 404)
+ErrorDocument 404 /404.php
+
+# Oletussivu (pidä vain yksi: index.html TAI index.php)
+DirectoryIndex index.php index.html
+
+# Fonttien MIME-tyyppi (fonts/-kansio, omalta palvelimelta)
+AddType font/woff2 .woff2
+
+# ----- Selaimen välimuisti -----
+# Turvallista cache-bustingin kanssa: css/js-linkeissä on ?v=<muokkausaika>.
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css               "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType text/javascript        "access plus 1 year"
+    ExpiresByType font/woff2             "access plus 1 year"
+    ExpiresByType image/jpeg             "access plus 7 days"
+    ExpiresByType image/png              "access plus 7 days"
+    ExpiresByType image/webp             "access plus 7 days"
+    ExpiresByType image/svg+xml          "access plus 7 days"
+    ExpiresByType image/x-icon           "access plus 30 days"
+    ExpiresByType audio/wav              "access plus 30 days"
+    ExpiresByType text/html              "access plus 0 seconds"
+</IfModule>
+
+<IfModule mod_headers.c>
+    # HSTS: selain käyttää tätä sivustoa vuoden ajan aina HTTPS:llä (myös ensimmäinen pyyntö).
+    # Ei includeSubDomains, jotta mahdolliset alidomainit ilman varmennetta eivät katkea.
+    Header always set Strict-Transport-Security "max-age=31536000"
+
+    <FilesMatch "\.(css|js|woff2)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    <FilesMatch "\.(php|html)$">
+        Header set Cache-Control "no-cache, must-revalidate"
+    </FilesMatch>
+</IfModule>
+
+# ----- Pakkaus (gzip) -----
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
+    AddOutputFilterByType DEFLATE application/javascript text/javascript application/json
+    AddOutputFilterByType DEFLATE image/svg+xml application/xml
+</IfModule>
+
+# ----- Hotlink-suojaus: estä kuvien upotus muilta sivustoilta -----
+# HUOM: RewriteCond-rivit koskevat AINA seuraavaa RewriteRulea, joten poikkeukset
+# ovat tässä heti cPanelin lohkon yläpuolella (ennen ne olivat ylempänä irrallaan).
+# Poikkeukset:
+#  - some-palveluiden esikatselurobotit (LinkedIn, Facebook, X, WhatsApp ym.)
+#  - jakokuvat (*_og.jpg) ja linkkisivun QR-koodi, jotta ne toimivat kaikkialla
+#  - tyhjä Referer = suora pyyntö (kuvan avaus suoraan, hakukoneiden kuvarobotit,
+#    selaimet jotka eivät lähetä Refereriä) — vastaa cPanelin "Allow direct requests"
+RewriteCond %{HTTP_USER_AGENT} !(LinkedInBot|facebookexternalhit|Facebot|Twitterbot|WhatsApp|Slackbot|Discordbot|TelegramBot|Applebot|Pinterest) [NC]
+RewriteCond %{REQUEST_URI} !(_og\.(jpe?g|png)|linkit_qr\.png)$ [NC]
+RewriteCond %{HTTP_REFERER} !^$
+# --- cPanelin Hotlink Protection -lohko (cPanel kirjoittaa nämä itse) ---
+RewriteCond %{HTTP_REFERER} !^http://manalasdungeon.lv/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://manalasdungeon.lv$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.manalasdungeon.lv/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.manalasdungeon.lv$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://manalasdungeon.lv/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://manalasdungeon.lv$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.manalasdungeon.lv/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.manalasdungeon.lv$      [NC]
+RewriteRule .*\.(jpg|jpeg|gif|png|bmp|webp)$ - [F,NC]

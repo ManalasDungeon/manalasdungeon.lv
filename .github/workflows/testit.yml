@@ -1,0 +1,75 @@
+# Ajaa sivuston automaattiset testit (tests/run.js) jokaisen päivityksen yhteydessä.
+# Testit käyttävät omaa tilapäistä MariaDB-tietokantaa ja sivuston kopiota — oikeaa sivustoa ei kosketa.
+# Kuvavertailu jätetään pois (--no-visual), koska fontit piirtyvät eri koneilla hieman eri tavoin;
+# se ajetaan paikallisesti omilla pohjakuvilla.
+name: Testit
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: testit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  testit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+
+    services:
+      mariadb:
+        image: mariadb:11.4
+        env:
+          MARIADB_DATABASE: manalas_test
+          MARIADB_USER: manalas_test
+          MARIADB_PASSWORD: manalas_test
+          MARIADB_RANDOM_ROOT_PASSWORD: '1'
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s --health-timeout=5s --health-retries=20
+
+    steps:
+      - name: Hae koodi
+        uses: actions/checkout@v4
+
+      - name: PHP 8.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: pdo_mysql, mbstring, openssl, gd
+          coverage: none
+
+      - name: Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Asenna testien riippuvuudet
+        working-directory: tests
+        run: npm install --no-audit --no-fund
+
+      - name: Asenna Chromium
+        working-directory: tests
+        run: npx playwright install --with-deps chromium
+
+      - name: Aja testit
+        working-directory: tests
+        env:
+          TEST_DB_HOST: 127.0.0.1
+          TEST_OVERLAY: ${{ github.workspace }}/tests/fixtures/overlay
+        run: node run.js --no-visual
+
+      - name: Tallenna testien tulosteet virhetilanteessa
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: testitulokset
+          path: tests/output/
+          if-no-files-found: ignore

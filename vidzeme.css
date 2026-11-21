@@ -1,0 +1,382 @@
+/* ============================================================
+   Vidzemes apkārtne — matkailukohteiden linkkisivu
+   Sama latvialainen teema kuin vieraskirjassa / Vitrupessa.
+   Ladataan manala.css:n JÄLKEEN.
+   ============================================================ */
+
+/* Fontit: fonts.css (oma palvelin), linkitetty sivun <head>-osassa */
+
+:root {
+  --lv-red:         #9E1B32;
+  --lv-red-dark:    #6E1223;
+  --lv-amber:       #C08A2E;
+  --lv-amber-light: #E4C77A;
+  --lv-ink:         #2B211C;
+  --lv-linen:       #F5EEE2;
+  --lv-cream:       #FBF7F0;
+  --lv-line:        #E6DCCB;
+}
+
+* { box-sizing: border-box; }
+
+.vz-body {
+  margin: 0;
+  background: var(--lv-cream);
+  color: var(--lv-ink);
+  font-family: 'Nunito Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.65;
+}
+/* Älä näytä etusivun (manala.css) taustakuvaa täällä — yhtenäinen tausta. */
+.vz-body::before,
+.vz-body::after { content: none !important; background: none !important; }
+
+/* ---------- Hero (Latvija-banneri + otsikko oikealla linnan päällä) ---------- */
+.vz-hero {
+  position: relative; overflow: hidden; line-height: 0;
+  background: var(--lv-red-dark);
+  border-bottom: 4px solid var(--lv-amber);
+}
+.vz-hero__img { display: block; width: 100%; height: auto; }
+/* Tummennus oikealle, jotta valkoinen otsikko erottuu linnan päällä */
+.vz-hero::after {
+  content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: linear-gradient(90deg,
+    rgba(20,10,8,0) 38%, rgba(20,10,8,.5) 54%, rgba(20,10,8,.84) 100%);
+}
+.vz-hero__inner {
+  position: absolute; top: 0; right: 0; bottom: 0; z-index: 3;
+  width: 50%; max-width: 620px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 1rem clamp(1rem, 3vw, 2.2rem);
+  color: #fff;
+}
+/* ---------- Paluu + kielivalitsin (sama tyyli kuin Ziņas / Ceļojums) ---------- */
+.vz-back,
+.vz-lang {
+  position: fixed; top: 16px; z-index: 20;
+  /* Oma GPU-kerros: fixed + backdrop-filter piirtyy oikein vierityksessä mobiilissa */
+  transform: translateZ(0); -webkit-transform: translateZ(0);
+  will-change: transform;
+  -webkit-backface-visibility: hidden; backface-visibility: hidden;
+}
+.vz-back {
+  left: 16px; display: inline-flex; align-items: center; gap: .4rem;
+  background: rgba(20, 10, 10, .55); color: var(--lv-cream); text-decoration: none;
+  font-weight: 600; font-size: .92rem; padding: .45rem 1.05rem; border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, .3); backdrop-filter: blur(4px);
+  transition: background .2s;
+}
+.vz-back:hover { background: var(--lv-red); }
+.vz-lang {
+  right: 16px; display: flex; gap: .15rem; background: rgba(20, 10, 10, .55);
+  border: 1px solid rgba(255, 255, 255, .25); border-radius: 30px; padding: .2rem; backdrop-filter: blur(4px);
+}
+.vz-lang a {
+  color: var(--lv-cream); text-decoration: none; font-weight: 700; font-size: .78rem;
+  letter-spacing: .04em; padding: .3rem .6rem; border-radius: 20px; opacity: .72; transition: .2s;
+}
+.vz-lang a:hover { opacity: 1; }
+.vz-lang a.active { background: var(--lv-red); opacity: 1; color: #fff; }
+
+/* Kullattu, kohokuvioitu otsikko (referenssin tyyli) */
+.vz-hero__title {
+  font-family: 'Playfair Display', Georgia, serif; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .015em; line-height: 1.02;
+  font-size: clamp(1.7rem, 3.8vw, 3.2rem); margin: 0;
+  background: linear-gradient(180deg, #FBEFC4 0%, #EACE82 36%, #C9962F 70%, #9A6A1C 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: #C9962F;
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,.5)) drop-shadow(0 3px 9px rgba(0,0,0,.55));
+}
+.vz-hero__sub {
+  margin: .75rem 0 0; color: #fff;
+  font-family: 'Nunito Sans', sans-serif; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .18em;
+  font-size: clamp(.66rem, 1.05vw, .9rem);
+  text-shadow: 0 2px 8px rgba(0,0,0,.75);
+}
+
+/* Lead-teksti bannerin alle (leipätekstinä) */
+.vz-intro { width: min(820px, 92vw); margin: clamp(2rem, 4.5vw, 3rem) auto 0; text-align: center; }
+.vz-intro::before {
+  content: ''; display: block; width: 54px; height: 3px; margin: 0 auto 1.15rem;
+  background: var(--lv-amber); border-radius: 2px;
+}
+.vz-intro__text {
+  margin: 0; font-size: clamp(1.12rem, 1.9vw, 1.32rem); line-height: 1.6;
+  color: #3f342c; font-weight: 500;
+}
+
+/* ---------- Viralliset oppaat (chip-rivi) ---------- */
+.vz-guides { width: min(1120px, 92vw); margin: clamp(1.3rem,3vw,1.9rem) auto 0; }
+.vz-guides__head {
+  font-family: 'Nunito Sans', sans-serif; font-weight: 800; font-size: .76rem;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--lv-amber);
+  margin: 0 0 .8rem;
+}
+.vz-chips { display: flex; flex-wrap: wrap; gap: .6rem; }
+.vz-chip {
+  display: inline-flex; align-items: center; gap: .4rem;
+  background: #fff; border: 1px solid var(--lv-line); border-radius: 30px;
+  padding: .5rem 1.1rem; color: var(--lv-ink); text-decoration: none;
+  font-weight: 700; font-size: .9rem; transition: border-color .2s, transform .2s, box-shadow .2s;
+}
+.vz-chip::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--lv-amber); }
+.vz-chip:hover { border-color: var(--lv-amber); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(43,33,28,.1); }
+
+/* ---------- Pääsisältö ---------- */
+.vz-main { width: min(1120px, 92vw); margin: clamp(2.4rem, 5vw, 3.6rem) auto; }
+
+/* Novads-osio */
+.vz-novads { margin-bottom: clamp(2.6rem, 5vw, 4rem); }
+.vz-novads__title {
+  font-family: 'Playfair Display', Georgia, serif; font-weight: 700;
+  color: var(--lv-red); font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  margin: 0 0 1.4rem; display: flex; align-items: center; gap: .7rem;
+}
+.vz-novads__title::before { content: ''; width: 34px; height: 4px; background: var(--lv-amber); border-radius: 2px; }
+
+/* Kaupunkien ruudukko */
+.vz-cities { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.4rem; }
+.vz-city {
+  background: #fff; border: 1px solid var(--lv-line);
+  border-radius: 18px; padding: 1.5rem 1.6rem 1.7rem;
+  box-shadow: 0 10px 26px rgba(43, 33, 28, .07);
+}
+.vz-city__head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 1rem; flex-wrap: wrap; margin: 0 0 1rem;
+  border-bottom: 2px solid var(--lv-linen); padding-bottom: .7rem;
+}
+.vz-city__name {
+  font-family: 'Playfair Display', serif; font-weight: 700;
+  color: var(--lv-ink); font-size: 1.35rem; margin: 0;
+}
+.vz-city__hub { font-size: .82rem; font-weight: 700; color: var(--lv-red); text-decoration: none; white-space: nowrap; }
+.vz-city__hub:hover { text-decoration: underline; }
+
+/* Kategoriaryhmä */
+.vz-cat { margin-top: 1.1rem; }
+.vz-cat:first-of-type { margin-top: 0; }
+.vz-cat__label {
+  font-family: 'Nunito Sans', sans-serif; font-weight: 800; font-size: .72rem;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--lv-amber);
+  margin: 0 0 .45rem; display: flex; align-items: center; gap: .5rem;
+}
+.vz-cat__label::before { content: ''; width: 18px; height: 2px; background: var(--lv-amber); border-radius: 2px; }
+.vz-links { list-style: none; margin: 0; padding: 0; }
+.vz-links li { margin: 0 0 .35rem; }
+.vz-links a {
+  display: inline-flex; align-items: center; gap: .4rem;
+  color: var(--lv-ink); text-decoration: none; font-weight: 600; font-size: .98rem;
+  border-bottom: 1px solid transparent; transition: color .18s, border-color .18s;
+}
+.vz-links a::after { content: '↗'; font-size: .78em; color: var(--lv-amber); opacity: .7; }
+.vz-links a:hover { color: var(--lv-red); border-color: var(--lv-amber-light); }
+
+/* ---------- Footer ---------- */
+.vz-footer {
+  background: var(--lv-ink); color: rgba(245,238,226,.85);
+  text-align: center; padding: clamp(2.4rem, 5vw, 3.6rem) 1.2rem;
+  border-top: 4px solid var(--lv-amber);
+}
+.vz-footer__note {
+  width: min(680px, 92vw); margin: 0 auto 1.4rem;
+  font-size: .9rem; color: rgba(245,238,226,.7);
+}
+.vz-footer-link {
+  display: inline-flex; align-items: center; gap: .6rem;
+  background: linear-gradient(135deg, var(--lv-red) 0%, var(--lv-red-dark) 100%);
+  color: #fff; text-decoration: none;
+  font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 1.1rem;
+  padding: .8rem 2rem; border-radius: 40px; border: 2px solid var(--lv-amber);
+  box-shadow: 0 8px 22px rgba(158, 27, 50, .3);
+  transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+.vz-footer-link:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(158, 27, 50, .42); border-color: var(--lv-amber-light); }
+.vz-footer-link .vz-arrow { font-size: 1.25em; line-height: 1; transition: transform .2s; }
+.vz-footer-link:hover .vz-arrow { transform: translateX(4px); }
+.vz-footer__copy { margin: 1.4rem 0 0; font-size: .84rem; color: rgba(245,238,226,.6); }
+.vz-footer__copy a { color: var(--lv-amber-light); text-decoration: none; font-weight: 600; }
+.vz-footer__copy a:hover { text-decoration: underline; }
+
+/* ---------- Historia: kolme tähteä + aikajana ---------- */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+.vz-intro__hist {
+  display: inline-flex; align-items: center; gap: .45rem; margin-top: 1.1rem;
+  color: var(--lv-red); font-weight: 800; font-size: .86rem; letter-spacing: .08em;
+  text-transform: uppercase; text-decoration: none;
+  border-bottom: 2px solid var(--lv-amber-light); padding-bottom: .15rem;
+  transition: color .2s, border-color .2s;
+}
+.vz-intro__hist span:first-child { color: var(--lv-amber); }
+.vz-intro__hist:hover { color: var(--lv-red-dark); border-color: var(--lv-amber); }
+
+.vz-history {
+  background: var(--lv-linen);
+  border-top: 1px solid var(--lv-line);
+  padding: clamp(2.6rem, 6vw, 4.2rem) 0 clamp(2.8rem, 6vw, 4.4rem);
+  scroll-margin-top: 64px;
+}
+.vz-history__inner { width: min(1120px, 92vw); margin: 0 auto; }
+.vz-history__eyebrow {
+  font-weight: 800; font-size: .76rem; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--lv-amber); margin: 0 0 .35rem;
+}
+
+/* Tähtimerkki: kolme kultaista tähteä kaaressa kuten vaakunassa ja Mildan käsissä */
+.vz-stars-row {
+  display: grid; grid-template-columns: minmax(280px, 400px) 1fr;
+  gap: clamp(1.4rem, 4vw, 3rem); align-items: center;
+}
+.vz-stars {
+  display: flex; justify-content: center; align-items: flex-end; gap: clamp(.6rem, 2.5vw, 1.4rem);
+  padding: 2rem 1.2rem 1.6rem; border-radius: 20px;
+  background:
+    radial-gradient(ellipse at 50% 18%, rgba(228,199,122,.22), transparent 62%),
+    linear-gradient(160deg, var(--lv-red) 0%, var(--lv-red-dark) 70%, #4a0c18 100%);
+  border: 2px solid var(--lv-amber);
+  box-shadow: 0 14px 34px rgba(110,18,35,.28), inset 0 0 0 5px rgba(228,199,122,.12);
+}
+.vz-star { display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1 1 0; min-width: 0; }
+.vz-star svg {
+  width: clamp(44px, 9vw, 60px); height: auto; margin-bottom: .55rem;
+  fill: #D9B45A;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,.35));
+}
+/* Keskimmäinen (Vidzeme) korostettuna ja hieman ylempänä */
+.vz-star--on { transform: translateY(-14px); }
+.vz-star--on svg {
+  width: clamp(58px, 12vw, 80px); fill: #F3D98A;
+  filter: drop-shadow(0 0 10px rgba(243,217,138,.65)) drop-shadow(0 2px 3px rgba(0,0,0,.35));
+}
+.vz-star__name {
+  font-family: 'Playfair Display', Georgia, serif; font-weight: 700;
+  color: var(--lv-cream); font-size: clamp(.92rem, 2vw, 1.08rem); line-height: 1.2;
+}
+.vz-star--on .vz-star__name { color: #F3D98A; font-size: clamp(1.02rem, 2.3vw, 1.22rem); }
+.vz-star__note {
+  margin-top: .2rem; font-size: .74rem; line-height: 1.3; color: rgba(251,247,240,.72);
+  font-style: italic;
+}
+.vz-history__text p { margin: 0 0 1rem; font-size: clamp(1.02rem, 1.6vw, 1.12rem); color: #3f342c; }
+.vz-history__text p:last-child { margin-bottom: 0; }
+.vz-history__milda {
+  border-left: 4px solid var(--lv-amber); padding: .2rem 0 .2rem 1rem;
+  font-family: 'Playfair Display', Georgia, serif; font-style: italic;
+  font-size: clamp(1.08rem, 1.8vw, 1.22rem) !important; color: var(--lv-red-dark) !important;
+}
+
+/* Monumentin kirjoitus: travertiinilaatta, kultaiset kaiverretut kirjaimet */
+.vz-insc { margin: clamp(2.2rem, 5vw, 3.2rem) auto 0; max-width: 820px; text-align: center; }
+.vz-insc__label {
+  font-weight: 800; font-size: .74rem; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--lv-amber); margin: 0 0 .8rem;
+}
+.vz-insc__plate {
+  margin: 0; padding: clamp(1.3rem, 3.5vw, 2rem) clamp(1rem, 3vw, 2.4rem);
+  border-radius: 6px; position: relative;
+  background:
+    repeating-linear-gradient(178deg, rgba(120,98,70,.045) 0 1px, transparent 1px 7px, rgba(120,98,70,.03) 7px 9px, transparent 9px 17px),
+    radial-gradient(ellipse at 30% 20%, #EFE6D3 0%, #E2D5BC 55%, #D4C5A6 100%);
+  border: 1px solid #C9B796;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.55), inset 0 -3px 8px rgba(90,70,40,.18),
+              0 12px 28px rgba(43,33,28,.14);
+}
+.vz-insc__plate::before {
+  content: ''; position: absolute; inset: 8px; border: 1px solid rgba(150,125,85,.35); border-radius: 3px;
+  pointer-events: none;
+}
+.vz-insc__plate p {
+  margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;
+  font-size: clamp(1.25rem, 4.6vw, 2.6rem); letter-spacing: .16em; line-height: 1.25;
+  background: linear-gradient(180deg, #E9C96E 0%, #C08A2E 55%, #8A5E17 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: #A9761F;
+  filter: drop-shadow(0 1px 0 rgba(255,255,255,.7)) drop-shadow(0 -1px 0 rgba(70,48,15,.35));
+  padding: .1em .2em; /* ettei background-clip leikkaa Ē/Ī-viivoja */
+}
+.vz-insc__tr {
+  margin: .9rem 0 0; font-family: 'Playfair Display', Georgia, serif; font-style: italic;
+  font-size: clamp(1.02rem, 1.8vw, 1.18rem); color: var(--lv-red-dark);
+}
+.vz-insc__by { margin: .35rem 0 0; font-size: .86rem; color: #6b5d50; letter-spacing: .04em; }
+
+/* Faktakortit */
+.vz-hist-cards {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.4rem; margin-top: clamp(2rem, 4vw, 2.8rem);
+}
+.vz-hist-card {
+  background: #fff; border: 1px solid var(--lv-line); border-top: 4px solid var(--lv-red);
+  border-radius: 18px; padding: 1.4rem 1.6rem 1.5rem;
+  box-shadow: 0 10px 26px rgba(43,33,28,.07);
+}
+.vz-hist-card__title {
+  font-family: 'Playfair Display', serif; font-weight: 700; color: var(--lv-ink);
+  font-size: 1.3rem; margin: 0 0 .8rem;
+}
+.vz-hist-card__list { list-style: none; margin: 0; padding: 0; }
+.vz-hist-card__list li {
+  position: relative; padding-left: 1.4rem; margin: 0 0 .55rem; font-size: .97rem; line-height: 1.55;
+}
+.vz-hist-card__list li::before {
+  content: '★'; position: absolute; left: 0; top: .05em; color: var(--lv-amber); font-size: .82em;
+}
+
+/* Aikajana */
+.vz-tl__title {
+  font-family: 'Playfair Display', serif; font-weight: 700; color: var(--lv-red);
+  font-size: clamp(1.35rem, 2.8vw, 1.7rem); margin: clamp(2.4rem, 5vw, 3.2rem) 0 .3rem;
+}
+.vz-tl__intro { margin: 0 0 1.4rem; color: #6b5d50; font-style: italic; }
+.vz-tl { list-style: none; margin: 0; padding: 0; position: relative; }
+.vz-tl::before {
+  content: ''; position: absolute; top: .4rem; bottom: .4rem; left: 7.6rem; width: 2px;
+  background: linear-gradient(var(--lv-amber), var(--lv-amber-light));
+}
+.vz-tl__item {
+  display: grid; grid-template-columns: 6.6rem 1fr; gap: 2rem;
+  position: relative; padding: 0 0 1.15rem;
+}
+.vz-tl__item::before {
+  content: ''; position: absolute; left: calc(7.6rem - 5px); top: .42rem;
+  box-sizing: border-box; width: 12px; height: 12px; border-radius: 50%;
+  background: var(--lv-cream); border: 3px solid var(--lv-red);
+}
+.vz-tl__year {
+  text-align: right; font-family: 'Playfair Display', serif; font-weight: 700;
+  color: var(--lv-red-dark); font-size: 1.02rem; line-height: 1.5;
+}
+.vz-tl__text { margin: 0; font-size: .98rem; line-height: 1.55; }
+
+@media (max-width: 760px) {
+  .vz-stars-row { grid-template-columns: 1fr; }
+  .vz-stars { max-width: 420px; width: 100%; margin: 0 auto; }
+  /* Aikajana: vuosi tekstin yläpuolelle, viiva vasemmalle */
+  .vz-tl::before { left: 5px; }
+  .vz-tl__item { grid-template-columns: 1fr; gap: .1rem; padding-left: 1.7rem; }
+  .vz-tl__item::before { left: 0; }
+  .vz-tl__year { text-align: left; }
+}
+
+/* Kapeilla näytöillä otsikko kuvan ALLE palkkina (ei mahtuisi linnan päälle) */
+@media (max-width: 768px) {
+  .vz-hero { line-height: normal; }
+  .vz-hero::after { display: none; }
+  .vz-hero__inner {
+    position: static; width: auto; max-width: none;
+    background: linear-gradient(135deg, var(--lv-red) 0%, var(--lv-red-dark) 100%);
+    text-shadow: none;
+    padding: clamp(1.4rem, 5vw, 2rem) 1.2rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* Saavutettavuus (WCAG AA 4.5:1): kultainen pieni teksti vaalealla taustalla tummemmalla sävyllä */
+.vz-cat__label, .vz-guides__head, .vz-history__eyebrow, .vz-insc__label { color: #8A5E14; }
+
+/* Sama laatikon korkeus kaikille srcset-ko'oille (800/1200/1855 px), ettei sisältö siirry puolta pikseliä */
+.vz-hero__img { aspect-ratio: 1855 / 576; object-fit: cover; }

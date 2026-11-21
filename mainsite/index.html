@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manala Dzīvesapraksts - Heinola</title>
+
+    <link rel="preload" as="image" href="images/self.jpg">
+
+    <link rel="stylesheet" href="manala.css">
+    <script type="text/javascript" src="date_time.js"></script>
+</head>
+<body>
+
+    <!-- Profila karte -->
+    <div class="card profile-card">
+        <img src="images/self.jpg" alt="Profila attēls" class="profile-image">
+        <h1>Mana</h1>
+        <p class="location">
+            <span class="location-dot"></span>
+            Heinola, Somija
+        </p>
+    </div>
+
+    <!-- Informācijas karte -->
+    <div class="card info-card">
+        <section class="bio">
+            <p>Man ir 54 gadi, es dzīvoju Heinolā.</p>
+            <p>Es strādāju par <strong>mediju instruktoru</strong> Heinolas bibliotēkā.</p>
+            <p>Es mācos par <strong>programmatūras izstrādātāju</strong> attālināti Vamia.</p>
+        </section>
+
+        <section class="links">
+            <a href="https://www.manalasdungeon.lv/birdgame/" class="btn">
+                Putnu atpazīšanas spēle
+            </a>
+            <a href="https://www.manalasdungeon.lv/verkkokirjasto/" class="btn">
+                Manalas bibliotēka
+            </a>
+            <a href="https://manalasdungeon.lv/vitrupe/" class="btn">
+                Vitrupes Pludmale
+            </a>
+            <a href="viesu_gramata.php" class="btn">
+                Viesu grāmata
+            </a>
+        </section>
+
+        <section class="contact-info">
+            <p class="contact-label">Kontaktinformācija</p>
+            <p class="contact-email">marko.nakari(at)manalasdungeon.lv</p>
+        </section>
+    </div>
+
+    <!-- Datums un laiks -->
+    <div id="date_time_container">
+        <span id="date_time"></span>
+    </div>
+
+    <!-- Hosting -->
+    <div id="hosting_container">
+        <a href="https://portal.nano.lv/aff.php?aff=291" target="_blank" rel="noopener" id="hosting_link">nano.lv</a>
+    </div>
+
+    <!-- Skriptit -->
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+
+    <!-- © 2026 by marko.nakari(at)manalasdungeon.lv -->
+</body>
+</html>

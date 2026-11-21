@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://manalasdungeon.lv/vitrupe/sitemap.xml
+Sitemap: https://manalasdungeon.lv/sitemap.xml

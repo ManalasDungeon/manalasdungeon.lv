@@ -1,0 +1,32 @@
+# --- Salaisuudet: EI KOSKAAN versionhallintaan ---
+db_config.php
+passkey/config.php
+
+# --- Diagnostiikka- ja testiskriptit (poista myös palvelimelta käytön jälkeen) ---
+testi.php
+tarkista-*.php
+
+# --- Paketit, esikatselut ja työtiedostot ---
+*.zip
+*_esikatselu*.html
+*_esikatselu*.png
+*.txt
+!robots.txt
+
+# --- Käyttöjärjestelmä ja editorit ---
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+
+# --- Lokit ---
+*.log
+error_log
+.manala_*
+
+# --- Testit: riippuvuudet, tulokset ja paikalliset kuvavertailun pohjakuvat ---
+tests/node_modules/
+tests/output/
+tests/baseline/

@@ -1,0 +1,10 @@
+# Passkey-kansio: estä ei-julkisten tiedostojen suora haku.
+<FilesMatch "^(config\.php|lib\.php|schema\.sql|ASENNUS\.md)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>

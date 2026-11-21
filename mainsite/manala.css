@@ -1,0 +1,261 @@
+/* --- MANALAS DUNGEON — LATVISKĀ TĒMA (Pikavesti) --- */
+:root {
+    --bg-color: #f3f0e9;        /* luonnonvalkoinen */
+    --card-bg: #ffffff;
+    --text-color: #2a2626;
+    --red: #8d2027;             /* karmiininpunainen */
+    --red-dark: #6f181e;
+    --black: #161515;
+    --muted: #7a7268;
+    --border-color: #ddd6c9;
+    --shadow-color: rgba(141, 32, 39, 0.10);
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 70px 20px 90px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* Sisältö reunanauhojen päälle */
+.card,
+#date_time_container,
+#hosting_container { position: relative; z-index: 1; }
+
+/* Latviešu prievīte — ylä- ja alareunan nauhat */
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    left: 0;
+    width: 100%;
+    height: 42px;
+    background-image: url('images/banner_prievite.png');
+    background-repeat: repeat-x;
+    background-size: auto 100%;
+    z-index: 10;
+    pointer-events: none;
+}
+body::before { top: 0; }
+body::after  { bottom: 0; }
+
+/* --- Kortit --- */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    border-top: 3px solid var(--red);
+    box-shadow: 0 4px 18px var(--shadow-color);
+    width: 100%;
+    max-width: 440px;
+    box-sizing: border-box;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: slideUp 0.5s ease forwards;
+}
+.info-card { animation-delay: 0.12s; }
+
+@keyframes slideUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Profila karte --- */
+.profile-card {
+    padding: 34px 36px 26px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    /* Tumma peitto + latvialainen lippukuva */
+    background-image:
+        linear-gradient(rgba(25, 10, 10, 0.55), rgba(25, 10, 10, 0.55)),
+        url('images/profile_bg.jpg');
+    background-size: cover;
+    background-position: center;
+    border-top-color: #b03040;
+}
+
+.profile-image {
+    width: 118px;
+    height: 118px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    object-fit: cover;
+    margin: 0 auto 16px;
+    display: block;
+    box-shadow: 0 0 0 4px rgba(255,255,255,0.25), 0 2px 12px rgba(0,0,0,0.4);
+    position: relative;
+}
+
+h1 {
+    color: #fff;
+    font-size: 2em;
+    margin: 0 0 8px;
+    letter-spacing: 2px;
+    font-weight: normal;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 2px 12px rgba(0,0,0,0.6);
+    position: relative;
+}
+
+.location {
+    color: #f0e6d8;
+    font-size: 0.95em;
+    font-style: italic;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+    position: relative;
+}
+
+.location-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: #ffcf6b;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+/* --- Informācijas karte --- */
+.info-card {
+    padding: 28px 36px 30px;
+}
+
+.bio {
+    line-height: 1.8;
+    font-size: 1em;
+    margin-bottom: 24px;
+    color: var(--text-color);
+}
+.bio p { margin: 0 0 8px; }
+.bio strong { color: var(--red); font-weight: bold; }
+
+/* Saites */
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 26px;
+}
+
+.btn {
+    display: block;
+    color: var(--red);
+    text-decoration: none;
+    border: 1.5px solid var(--red);
+    border-radius: 4px;
+    padding: 11px 18px;
+    font-family: 'Georgia', serif;
+    font-size: 0.98em;
+    text-align: center;
+    background-color: #fff;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.btn:hover {
+    background-color: var(--red);
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Kontaktinformācija */
+.contact-info {
+    border-top: 1px solid var(--border-color);
+    padding-top: 18px;
+}
+.contact-label {
+    color: var(--red);
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.78em;
+    letter-spacing: 1.5px;
+    margin: 0 0 6px;
+}
+.contact-email {
+    color: var(--muted);
+    font-size: 0.92em;
+    margin: 0;
+    word-break: break-all;
+}
+
+/* --- Datums un laiks --- */
+#date_time_container {
+    position: fixed;
+    bottom: 58px;
+    left: 18px;
+    background-color: var(--card-bg);
+    color: var(--red);
+    padding: 7px 13px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    font-size: 0.82em;
+    font-family: 'Georgia', serif;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    z-index: 11;
+}
+
+/* --- Hosting --- */
+#hosting_container {
+    position: fixed;
+    bottom: 58px;
+    right: 18px;
+    background-color: var(--card-bg);
+    padding: 7px 13px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    font-size: 0.82em;
+    font-family: 'Georgia', serif;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    z-index: 11;
+}
+#hosting_link {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+#hosting_link:hover { color: var(--red); }
+
+@media (max-width: 500px) {
+    .profile-card, .info-card { padding: 24px 22px; }
+    h1 { font-size: 1.7em; }
+    .profile-image { width: 100px; height: 100px; }
+    body::before, body::after { height: 38px; }
+    #date_time_container, #hosting_container { bottom: 48px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .card { animation: none; opacity: 1; transform: none; }
+}
+
+/* --- Kielivalitsin (LV/EN/FI) --- */
+/* Kielivalitsin — manala.css:n tyylin mukainen */
+.lang-switch { position: fixed; top: 54px; right: 16px; z-index: 20; font-family: 'Georgia', 'Times New Roman', serif; }
+.lang-switch > summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: .4rem;
+    background: var(--card-bg, #fff); border: 1.5px solid var(--red, #8d2027); border-radius: 4px; padding: .4rem .8rem;
+    font-weight: bold; font-size: .85rem; color: var(--red, #8d2027); box-shadow: 0 2px 8px var(--shadow-color, rgba(141,32,39,.10));
+    transition: background-color .2s ease, color .2s ease; }
+.lang-switch > summary::-webkit-details-marker { display: none; }
+.lang-switch > summary::after { content: '▾'; font-size: .8em; }
+.lang-switch > summary:hover,
+.lang-switch[open] > summary { background: var(--red, #8d2027); color: #fff; }
+.lang-menu { position: absolute; right: 0; margin-top: .4rem; background: var(--card-bg, #fff);
+    border: 1px solid var(--border-color, #ddd6c9); border-top: 3px solid var(--red, #8d2027); border-radius: 4px;
+    box-shadow: 0 4px 18px var(--shadow-color, rgba(141,32,39,.10)); overflow: hidden; min-width: 172px; }
+.lang-menu a { display: flex; align-items: center; gap: .6rem; padding: .6rem .9rem; text-decoration: none;
+    color: var(--text-color, #2a2626); font-size: .95rem; transition: background-color .2s ease, color .2s ease; }
+.lang-menu a:hover { background: var(--red, #8d2027); color: #fff; }
+.lang-menu a.active { color: var(--red, #8d2027); font-weight: bold; }
+.lang-menu a.active:hover { color: #fff; }
+.lang-flag { font-size: 1.15rem; line-height: 1; }
+@media (max-width: 500px) { .lang-switch { top: 48px; right: 12px; } }

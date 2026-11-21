@@ -1,0 +1,85 @@
+/* ============================================================
+   Ziņas & Ceļojums — dokumentaatiosivun tyylit
+   (erotettu dokumentaatio.html:stä)
+   ============================================================ */
+
+:root{
+  --red:#8d2027; --red-dark:#6f181e;
+  --gold:#e4c56a; --gold-soft:#ffd87a;
+  --cream:#f5ece0; --ink:#160808;
+  --card:rgba(26,14,12,.62); --line:rgba(228,197,106,.45);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'EB Garamond','Georgia',serif; color:var(--cream);
+  background:var(--ink); line-height:1.7; font-size:1.08rem;
+  min-height:100vh; position:relative; padding:0 18px 70px;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:''; position:fixed; inset:0; z-index:-1;
+  background:
+    radial-gradient(70% 55% at 50% 0%, rgba(141,32,39,.28), transparent 70%),
+    radial-gradient(120% 90% at 50% 50%, #1c0a0a 40%, #120606 100%);
+}
+.wrap{ max-width:820px; margin:0 auto; }
+
+/* Hero */
+header.hero{ text-align:center; padding:clamp(3.5rem,9vw,5.5rem) 0 1rem; }
+.eyebrow{
+  display:inline-block; font-family:'Playfair Display',serif; font-weight:700;
+  letter-spacing:.24em; text-transform:uppercase; font-size:.8rem;
+  color:var(--gold-soft); background:rgba(20,10,10,.45);
+  border:1px solid rgba(255,255,255,.2); border-radius:30px;
+  padding:.35rem 1.1rem; margin-bottom:1rem;
+}
+h1{
+  font-family:'Playfair Display',serif; font-weight:700; color:#fff;
+  font-size:clamp(2.2rem,6vw,3.4rem); line-height:1.05; letter-spacing:.01em;
+  text-shadow:0 2px 20px rgba(0,0,0,.5);
+}
+.sub{ color:var(--gold-soft); font-style:italic; margin-top:.5rem; font-size:1.12rem; }
+.band{ height:3px; width:120px; margin:1.6rem auto 0;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+
+/* Kortti + avainkohdat */
+.card{
+  background:var(--card); border:1px solid rgba(255,255,255,.1);
+  border-left:4px solid var(--gold); border-radius:16px;
+  padding:clamp(1.5rem,4vw,2.6rem); margin-top:2.4rem;
+  box-shadow:0 14px 40px rgba(0,0,0,.4); backdrop-filter:blur(7px);
+  -webkit-backdrop-filter:blur(7px);
+}
+h2{
+  font-family:'Playfair Display',serif; font-weight:700; color:#fff;
+  font-size:clamp(1.4rem,3vw,1.8rem); margin-bottom:.4rem;
+  display:flex; align-items:center; gap:.6rem;
+}
+h2::before{ content:''; width:26px; height:3px; background:var(--gold); border-radius:2px; flex-shrink:0; }
+.lead{ color:rgba(245,236,224,.8); margin-bottom:1.6rem; font-size:1rem; }
+
+ul.keys{ list-style:none; display:flex; flex-direction:column; gap:1rem; }
+ul.keys li{
+  position:relative; padding:1rem 1.1rem 1rem 3rem;
+  background:rgba(20,10,10,.4); border:1px solid rgba(255,255,255,.08);
+  border-radius:12px; transition:border-color .2s, transform .2s;
+}
+ul.keys li:hover{ border-color:var(--line); transform:translateX(3px); }
+ul.keys li::before{
+  content:''; position:absolute; left:1.1rem; top:1.35rem;
+  width:9px; height:9px; border-radius:50%; background:var(--gold-soft);
+  box-shadow:0 0 0 4px rgba(255,216,122,.18);
+}
+ul.keys b{ color:#fff; font-weight:600; }
+code{
+  font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  font-size:.86em; color:var(--gold-soft);
+  background:rgba(0,0,0,.35); border:1px solid rgba(228,197,106,.25);
+  border-radius:6px; padding:.08em .4em; white-space:nowrap;
+}
+
+footer{ text-align:center; margin-top:2.6rem; color:rgba(245,236,224,.6); font-size:.88rem; }
+footer a{ color:var(--gold-soft); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (prefers-reduced-motion:reduce){ ul.keys li{ transition:none } }

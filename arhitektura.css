@@ -1,0 +1,401 @@
+/* =========================================================
+   Arkkitehtuurisivu (arhitektura.php)
+   Rakentuu portfolio.css:n päälle: samat värit, hero, painikkeet ja footer.
+   Animaatiot vain kun <html class="js"> — ilman JS:ää kaikki näkyy heti.
+   ========================================================= */
+
+/* ---------- Lukemisen edistymispalkki ---------- */
+.ar-progress { position: fixed; inset: 0 0 auto 0; height: 4px; z-index: 50; pointer-events: none; }
+.ar-progress span {
+  display: block; height: 100%; width: 100%; transform-origin: 0 50%; transform: scaleX(var(--p, 0));
+  background: linear-gradient(90deg, var(--lv-amber), var(--lv-amber-light), #fff);
+  box-shadow: 0 0 12px rgba(228, 199, 122, .7);
+}
+
+/* ---------- Hero ---------- */
+.ar-hero { padding-bottom: clamp(6rem, 11vw, 8rem); isolation: isolate; }
+.ar-grid {                                   /* liikkuva piirustusruudukko */
+  position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, .07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .07) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px);
+  background-size: 96px 96px, 96px 96px, 24px 24px, 24px 24px;
+  -webkit-mask-image: radial-gradient(80% 90% at 70% 40%, #000 30%, transparent 85%);
+          mask-image: radial-gradient(80% 90% at 70% 40%, #000 30%, transparent 85%);
+  animation: arGrid 40s linear infinite;
+}
+@keyframes arGrid { to { background-position: 96px 96px, 96px 96px, 24px 24px, 24px 24px; } }
+
+.ar-hero__inner {
+  width: min(1100px, 100%); margin: clamp(2rem, 6vw, 3.6rem) auto 0;
+  display: grid; grid-template-columns: 1.1fr .9fr; gap: 2rem; align-items: center;
+}
+.ar-title {
+  display: inline-block; padding: .06em .08em .14em; margin: -.06em -.08em -.14em;
+  background: linear-gradient(100deg, #fff 0%, #fff 38%, #F3D98A 50%, #fff 62%, #fff 100%);
+  background-size: 250% 100%; background-position: 100% 0;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: none; filter: drop-shadow(0 3px 18px rgba(0, 0, 0, .3));
+  animation: arShine 7s ease-in-out 1.2s infinite;
+}
+@keyframes arShine { 0%, 55% { background-position: 100% 0; } 100% { background-position: -50% 0; } }
+
+/* Isometrinen kerrospino */
+.ar-stack { width: 100%; max-width: 500px; justify-self: end; overflow: visible; }
+.ar-layer { animation: arFloat 6s ease-in-out infinite; animation-delay: calc(var(--i) * -1.2s); }
+@keyframes arFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+.ar-layer__top   { fill: rgba(255, 255, 255, .10); stroke: rgba(228, 199, 122, .75); stroke-width: 1.3; }
+.ar-layer__left  { fill: rgba(30, 6, 12, .45); stroke: rgba(228, 199, 122, .35); stroke-width: 1; }
+.ar-layer__right { fill: rgba(30, 6, 12, .28); stroke: rgba(228, 199, 122, .35); stroke-width: 1; }
+.ar-layer--acc .ar-layer__top   { fill: rgba(228, 199, 122, .38); stroke: #F3D98A; }
+.ar-layer--acc .ar-layer__left  { fill: rgba(140, 95, 25, .7); }
+.ar-layer--acc .ar-layer__right { fill: rgba(170, 120, 35, .6); }
+.ar-layer__lead  { stroke: rgba(228, 199, 122, .6); stroke-width: 1; stroke-dasharray: 3 3; }
+.ar-layer__label { fill: #fff; font: 700 15px 'Nunito Sans', system-ui, sans-serif; letter-spacing: .02em; }
+.ar-layer--acc .ar-layer__label { fill: #F3D98A; }
+.ar-packet { fill: #F3D98A; filter: drop-shadow(0 0 6px #F3D98A) drop-shadow(0 0 14px rgba(243, 217, 138, .8)); }
+
+/* Luvut heron alla */
+.ar-stats-wrap { width: min(1100px, 92vw); margin: 0 auto; }
+.ar-stats .pf-stat { transition-delay: calc(var(--i, 0) * 80ms); }
+.ar-stats .pf-stat__num { font-variant-numeric: tabular-nums; }
+
+/* ---------- Asettelu: sisällysluettelo + sisältö ---------- */
+.ar-layout {
+  width: min(1180px, 92vw); margin: 0 auto;
+  display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: clamp(2rem, 4vw, 3.4rem);
+}
+.ar-toc { position: sticky; top: 28px; align-self: start; margin-top: clamp(3rem, 7vw, 4.6rem); }
+.ar-toc__title { margin: 0 0 .7rem; font-weight: 800; font-size: .74rem; letter-spacing: .2em; text-transform: uppercase; color: var(--lv-amber); }
+.ar-toc ol { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--lv-line); counter-reset: toc; }
+.ar-toc li { counter-increment: toc; }
+.ar-toc a {
+  display: block; position: relative; padding: .38rem 0 .38rem 1rem; margin-left: -2px;
+  border-left: 2px solid transparent; text-decoration: none; color: #6b5d50; font-weight: 600; font-size: .9rem; line-height: 1.3;
+  transition: color .2s, border-color .2s, padding .25s;
+}
+.ar-toc a::before { content: counter(toc, decimal-leading-zero) ' '; color: #b9a88c; font-size: .74rem; font-weight: 800; margin-right: .3rem; }
+.ar-toc a:hover { color: var(--lv-red); }
+.ar-toc a.is-active { color: var(--lv-red); border-color: var(--lv-red); padding-left: 1.3rem; font-weight: 800; }
+
+.ar-main { min-width: 0; padding-bottom: 1rem; }
+.ar-sec { margin-top: clamp(3rem, 7vw, 4.6rem); scroll-margin-top: 24px; }
+.ar-h3 { margin: 2rem 0 .9rem; font-family: 'Playfair Display', Georgia, serif; font-size: 1.25rem; color: var(--lv-ink); }
+
+/* ---------- Ilmestymisanimaatio ---------- */
+.js [data-reveal] {
+  opacity: 0; transform: translateY(22px);
+  transition: opacity .75s ease, transform .75s cubic-bezier(.2, .7, .2, 1);
+  transition-delay: calc(var(--i, 0) * 90ms);
+}
+.js [data-reveal].is-in { opacity: 1; transform: none; }
+
+/* ---------- Periaatteet ---------- */
+.ar-principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+.ar-pcard {
+  position: relative; background: #fff; border: 1px solid var(--lv-line); border-radius: 18px;
+  padding: 1.4rem 1.4rem 1.2rem; overflow: hidden;
+  box-shadow: 0 8px 20px rgba(43, 33, 28, .06);
+}
+.ar-pcard::after {                          /* kultainen valojuova hoverissa */
+  content: ''; position: absolute; inset: -40% auto -40% -60%; width: 40%;
+  background: linear-gradient(90deg, transparent, rgba(228, 199, 122, .35), transparent);
+  transform: skewX(-20deg); transition: left .7s ease;
+}
+.ar-pcard:hover::after { left: 130%; }
+.js .ar-pcard.is-in:hover, .ar-pcard:hover { transform: translateY(-4px); box-shadow: 0 18px 34px rgba(110, 18, 35, .13); }
+.ar-pcard { transition: transform .25s, box-shadow .25s, opacity .75s, transform .75s; }
+.ar-pcard__icon {
+  width: 50px; height: 50px; border-radius: 14px; display: grid; place-items: center; margin-bottom: .9rem;
+  background: linear-gradient(135deg, var(--lv-red), var(--lv-red-dark)); color: var(--lv-amber-light);
+  box-shadow: 0 8px 18px rgba(158, 27, 50, .3); transition: transform .4s cubic-bezier(.3, 1.6, .5, 1);
+}
+.ar-pcard__icon svg { width: 26px; height: 26px; }
+.ar-pcard:hover .ar-pcard__icon { transform: rotate(-8deg) scale(1.08); }
+.ar-pcard h3 { margin: 0 0 .4rem; font-family: 'Playfair Display', Georgia, serif; font-size: 1.18rem; color: var(--lv-red); }
+.ar-pcard p { margin: 0; color: #4a3d34; font-size: .96rem; }
+
+/* ---------- Kaaviot ---------- */
+.ar-fig {
+  margin: 0; background: #fff; border: 1px solid var(--lv-line); border-radius: 20px;
+  padding: clamp(.8rem, 2vw, 1.4rem); box-shadow: 0 14px 34px rgba(43, 33, 28, .08);
+}
+.ar-fig__scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.ar-diagram { display: block; width: 100%; height: auto; font-family: 'Nunito Sans', system-ui, sans-serif; }
+.ar-fig figcaption {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+  margin-top: .8rem; padding-top: .8rem; border-top: 1px solid var(--lv-line);
+  font-size: .86rem; color: #6b5d50; font-weight: 600;
+}
+.ar-scrollhint { display: none; }
+
+.d-box   { fill: #fff; stroke: #CDBFA6; stroke-width: 1.3; }
+.d-box--muted { fill: var(--lv-linen); stroke-dasharray: 4 3; }
+.d-acc   { fill: rgba(158, 27, 50, .06); stroke: var(--lv-red); stroke-width: 2.2; }
+.d-host  { fill: var(--lv-linen); stroke: #D9CBB2; stroke-width: 1.3; }
+.d-name  { font-size: 13.5px; font-weight: 800; fill: var(--lv-ink); }
+.d-host__name { fill: #7a5a1f; }
+.d-line  { font-size: 11.8px; fill: #6b5d50; }
+.d-note  { font-size: 11.8px; fill: var(--lv-ink); }
+.d-note--b { font-weight: 800; fill: var(--lv-red); }
+.d-label { font-size: 11.5px; fill: #8a7a68; font-style: italic; }
+.d-row   { font-size: 11px; font-weight: 800; letter-spacing: .12em; fill: var(--lv-amber); }
+.d-msgtext { font-size: 12.3px; font-weight: 600; fill: var(--lv-ink); }
+.d-edge  { fill: none; stroke: #B5A386; stroke-width: 1.5; }
+.d-arrowhead { fill: #B5A386; }
+.d-flow  { stroke-dasharray: 6 5; }
+.d-flow--bad { stroke: #c96a6a; }
+.d-lifelines line { stroke: #DCCFB9; stroke-width: 1.3; stroke-dasharray: 4 4; }
+
+/* Laatikot ilmestyvät vuorotellen, viivoissa liikkuu dataa */
+.d-node { transform-box: fill-box; }
+.js .ar-fig .d-node { opacity: 0; transform: translateY(10px); transition: opacity .55s ease, transform .55s ease; transition-delay: calc(var(--i, 0) * 85ms + .15s); }
+.js .ar-fig.is-in .d-node { opacity: 1; transform: none; }
+.ar-fig.is-in .d-flow { animation: arDash 1.1s linear infinite; }
+@keyframes arDash { from { stroke-dashoffset: 22; } to { stroke-dashoffset: 0; } }
+
+/* Sekvenssikaavio: viestit piirtyvät yksi kerrallaan */
+.js .ar-seq .d-msg { opacity: 0; }
+.js .ar-seq .d-draw { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.js .ar-seq.is-in .d-msg { animation: arFadeIn .5s ease forwards; animation-delay: calc(var(--s) * .55s + .3s); }
+.js .ar-seq.is-in .d-draw { animation: arDraw .55s ease forwards; animation-delay: calc(var(--s) * .55s + .3s); }
+@keyframes arFadeIn { to { opacity: 1; } }
+@keyframes arDraw { to { stroke-dashoffset: 0; } }
+.ar-replay {
+  display: inline-flex; align-items: center; gap: .4rem; cursor: pointer;
+  font: inherit; font-weight: 800; font-size: .82rem; color: var(--lv-red);
+  background: rgba(158, 27, 50, .07); border: 1px solid rgba(158, 27, 50, .2); border-radius: 30px; padding: .35rem .85rem;
+  transition: background .2s, transform .2s;
+}
+.ar-replay svg { width: 15px; height: 15px; transition: transform .5s; }
+.ar-replay:hover { background: rgba(158, 27, 50, .13); }
+.ar-replay:hover svg { transform: rotate(-200deg); }
+.no-js .ar-replay, html:not(.js) .ar-replay { display: none; }
+
+/* ---------- Pyynnön kulku: putki ---------- */
+.ar-request { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.6rem; align-items: start; }
+.ar-pipe { list-style: none; margin: 0; padding: 0; position: relative; }
+.ar-pipe::before, .ar-pipe::after {
+  content: ''; position: absolute; left: 21px; top: 22px; bottom: 22px; width: 3px; border-radius: 2px;
+}
+.ar-pipe::before { background: var(--lv-line); }
+.ar-pipe::after {
+  background: linear-gradient(var(--lv-red), var(--lv-amber));
+  transform-origin: top; transform: scaleY(1); transition: transform 1.6s cubic-bezier(.3, .6, .2, 1) .2s;
+}
+.js .ar-pipe:not(.is-in)::after { transform: scaleY(0); }
+.js .ar-pipe[data-reveal] { opacity: 1; transform: none; }       /* putki itse näkyy, vaiheet ilmestyvät */
+.ar-pipe li { position: relative; display: flex; gap: 1rem; padding: 0 0 1.1rem; }
+.ar-pipe li > div {
+  flex: 1; background: #fff; border: 1px solid var(--lv-line); border-radius: 14px; padding: .8rem 1rem;
+  box-shadow: 0 6px 16px rgba(43, 33, 28, .05);
+}
+.ar-pipe h3 { margin: 0 0 .15rem; font-size: 1rem; color: var(--lv-ink); }
+.ar-pipe p { margin: 0; font-size: .93rem; color: #5b4c41; }
+.ar-pipe__num {
+  position: relative; z-index: 1; flex-shrink: 0; width: 45px; height: 45px; border-radius: 50%;
+  display: grid; place-items: center; font-weight: 800; color: #fff; font-size: 1.05rem;
+  background: linear-gradient(135deg, var(--lv-red), var(--lv-red-dark));
+  border: 3px solid var(--lv-cream); box-shadow: 0 0 0 2px var(--lv-amber-light);
+}
+.js .ar-pipe li { opacity: 0; transform: translateX(-14px); transition: opacity .5s, transform .5s; transition-delay: calc(var(--i) * .22s + .2s); }
+.js .ar-pipe.is-in li { opacity: 1; transform: none; }
+.ar-pipe.is-in .ar-pipe__num { animation: arPing 2.4s ease-out infinite; animation-delay: calc(var(--i) * .4s + 2s); }
+@keyframes arPing { 0% { box-shadow: 0 0 0 2px var(--lv-amber-light), 0 0 0 2px rgba(228, 199, 122, .6); } 60%, 100% { box-shadow: 0 0 0 2px var(--lv-amber-light), 0 0 0 14px rgba(228, 199, 122, 0); } }
+
+/* Sivun käynnistys: pääteikkuna */
+.ar-boot {
+  position: sticky; top: 28px; border-radius: 16px; overflow: hidden;
+  background: #1d1215; color: #f3e9dc; box-shadow: 0 18px 40px rgba(29, 18, 21, .35);
+}
+.ar-boot h3 {
+  margin: 0; padding: .75rem 1rem .75rem 4.2rem; position: relative; font-size: .86rem; font-weight: 800;
+  letter-spacing: .06em; color: var(--lv-amber-light); background: #2a1a1e; border-bottom: 1px solid rgba(255, 255, 255, .06);
+}
+.ar-boot h3::before {                       /* ikkunan napit */
+  content: ''; position: absolute; left: 1rem; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%;
+  background: #e0605e; box-shadow: 16px 0 #e3b341, 32px 0 #5fbf6a;
+}
+.ar-code { list-style: none; margin: 0; padding: 1rem 1.1rem 1.2rem; counter-reset: ln; font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace; font-size: .82rem; line-height: 1.55; }
+.ar-code li { counter-increment: ln; display: flex; gap: .7rem; padding: .25rem 0; }
+.ar-code li::before { content: counter(ln); color: #7d6a6e; min-width: 1ch; }
+.js .ar-boot.is-in .ar-code li { animation: arType .5s steps(18) both; animation-delay: calc(var(--i) * .35s + .5s); }
+@keyframes arType { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+.ar-code li:last-child::after { content: '▍'; color: var(--lv-amber-light); animation: arBlink 1s steps(1) infinite; margin-left: .2rem; }
+@keyframes arBlink { 50% { opacity: 0; } }
+
+/* ---------- Osat ---------- */
+.ar-comps { display: grid; grid-template-columns: repeat(3, 1fr); gap: .9rem; }
+.ar-comp {
+  position: relative; background: #fff; border: 1px solid var(--lv-line); border-radius: 14px;
+  padding: 1rem 1.1rem 1rem; display: flex; flex-direction: column; gap: .3rem;
+  transition: border-color .25s, transform .25s, box-shadow .25s, opacity .75s;
+}
+.ar-comp::before { content: ''; position: absolute; left: 0; top: 14px; bottom: 14px; width: 3px; border-radius: 0 3px 3px 0; background: var(--lv-amber); transform: scaleY(.3); transition: transform .3s; }
+.ar-comp:hover { border-color: var(--lv-amber-light); box-shadow: 0 12px 26px rgba(43, 33, 28, .09); }
+.ar-comp:hover::before { transform: scaleY(1); }
+.ar-comp h3 { margin: 0; font-size: 1.02rem; color: var(--lv-ink); }
+.ar-comp p { margin: 0; flex: 1; font-size: .9rem; color: #5b4c41; }
+.ar-chip {
+  align-self: flex-start; margin-top: .35rem; font-size: .72rem; font-weight: 800; letter-spacing: .06em;
+  padding: .18rem .6rem; border-radius: 20px; background: var(--lv-linen); color: #7a5a1f; border: 1px solid var(--lv-line);
+}
+.ar-chip--key { background: var(--lv-red); color: #fff; border-color: var(--lv-red); }
+
+/* ---------- Kielet ---------- */
+.ar-i18n { display: grid; grid-template-columns: 1fr 1.2fr; gap: 1.6rem; align-items: start; }
+.ar-urls { display: flex; flex-direction: column; gap: .6rem; }
+.ar-url {
+  display: flex; align-items: center; gap: .7rem; padding: .7rem .9rem; border-radius: 12px;
+  background: #fff; border: 1px solid var(--lv-line); font-size: .86rem; overflow: hidden;
+  transition: transform .3s, box-shadow .3s;
+}
+.ar-url:hover { transform: translateX(6px); }
+.ar-url code { font-family: 'JetBrains Mono', ui-monospace, monospace; color: #5b4c41; white-space: nowrap; }
+.ar-url code b { color: var(--lv-red); font-weight: 500; }
+.ar-url__flag { font-size: 1.25rem; line-height: 1; }
+.ar-url.is-current { border-color: var(--lv-red); box-shadow: 0 0 0 3px rgba(158, 27, 50, .1); }
+.ar-url.is-current code::after { content: '▍'; color: var(--lv-red); animation: arBlink 1s steps(1) infinite; }
+.ar-dl { margin: 0; display: grid; gap: .7rem; }
+.ar-dl div { padding: .2rem 0 .2rem 1rem; border-left: 3px solid var(--lv-amber-light); }
+.ar-dl dt { font-weight: 800; color: var(--lv-ink); }
+.ar-dl dd { margin: .1rem 0 0; color: #5b4c41; font-size: .94rem; }
+
+/* ---------- Data ---------- */
+.ar-tables { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.ar-table {
+  position: relative; border-radius: 16px; padding: 1.3rem 1.2rem 1.1rem; color: #fff; overflow: hidden;
+  background: radial-gradient(90% 120% at 100% 0%, rgba(192, 138, 46, .35), transparent 60%), linear-gradient(140deg, var(--lv-red), var(--lv-red-dark));
+  box-shadow: 0 14px 30px rgba(110, 18, 35, .22);
+}
+.ar-table__icon { width: 36px; height: 36px; color: var(--lv-amber-light); margin-bottom: .6rem; }
+.ar-table.is-in .ar-table__icon { animation: arPulse 3s ease-in-out infinite; animation-delay: calc(var(--i) * .5s); }
+@keyframes arPulse { 50% { transform: translateY(-3px); filter: drop-shadow(0 0 8px rgba(228, 199, 122, .8)); } }
+.ar-table h3 { margin: 0 0 .35rem; font-family: 'Playfair Display', Georgia, serif; font-size: 1.2rem; }
+.ar-table p { margin: 0; font-size: .92rem; color: rgba(255, 255, 255, .9); }
+
+.ar-ticks { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; }
+.ar-ticks--2 { grid-template-columns: repeat(2, 1fr); margin-top: 1.2rem; }
+.ar-ticks li { position: relative; padding: .55rem .8rem .55rem 2.4rem; background: #fff; border: 1px solid var(--lv-line); border-radius: 10px; font-size: .94rem; }
+.ar-ticks li::before {
+  content: ''; position: absolute; left: .8rem; top: 50%; width: 18px; height: 18px; margin-top: -9px; border-radius: 50%;
+  background: var(--lv-amber) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12 4 4 8-8'/%3E%3C/svg%3E") center / 12px no-repeat;
+}
+.ar-ticks--next li::before { background: var(--lv-linen) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239E1B32' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center / 12px no-repeat; border: 1px solid var(--lv-line); }
+
+/* ---------- Tietoturva ---------- */
+.ar-sec-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: .9rem; }
+.ar-threat {
+  display: flex; gap: .95rem; align-items: flex-start; background: #fff; border: 1px solid var(--lv-line);
+  border-radius: 14px; padding: 1rem 1.1rem; transition: border-color .25s, box-shadow .25s, opacity .75s, transform .75s;
+}
+.ar-threat:hover { border-color: rgba(158, 27, 50, .35); box-shadow: 0 12px 26px rgba(110, 18, 35, .1); }
+.ar-threat__icon {
+  flex-shrink: 0; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center;
+  background: rgba(158, 27, 50, .08); color: var(--lv-red); transition: background .3s, color .3s, transform .4s;
+}
+.ar-threat__icon svg { width: 21px; height: 21px; }
+.ar-threat:hover .ar-threat__icon { background: var(--lv-red); color: #fff; transform: scale(1.08); }
+.ar-threat__k { margin: 0; font-size: .68rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #b46a6a; }
+.ar-threat h3 { margin: .05rem 0 .25rem; font-size: 1rem; color: var(--lv-ink); }
+.ar-threat p:last-child { margin: 0; font-size: .92rem; color: #5b4c41; }
+.ar-note {
+  margin: 1.1rem 0 0; padding: .9rem 1.1rem .9rem 3rem; position: relative; border-radius: 12px;
+  background: var(--lv-linen); border: 1px dashed #d4c3a6; color: #5b4c41; font-size: .94rem;
+}
+.ar-note::before { content: '🔒'; position: absolute; left: 1rem; top: .85rem; font-size: 1.1rem; }
+
+/* ---------- Kaksi huomiota, sarakkeet, värit ---------- */
+.ar-two { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.1rem; }
+.ar-q { background: var(--lv-linen); border-radius: 14px; padding: 1.1rem 1.2rem 1rem; border-top: 3px solid var(--lv-red); }
+.ar-q h3 { margin: 0 0 .3rem; font-family: 'Playfair Display', Georgia, serif; font-size: 1.08rem; }
+.ar-q p { margin: 0; font-size: .93rem; color: #5b4c41; }
+
+.ar-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.ar-col { background: #fff; border: 1px solid var(--lv-line); border-radius: 16px; padding: 1.2rem 1.2rem 1rem; }
+.ar-col h3 { margin: 0 0 .6rem; font-family: 'Playfair Display', Georgia, serif; font-size: 1.15rem; color: var(--lv-red); }
+.ar-col ul { margin: 0; padding: 0 0 0 1.1rem; display: grid; gap: .35rem; font-size: .92rem; color: #4a3d34; }
+.ar-col li::marker { color: var(--lv-amber); }
+
+.ar-swatches { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.2rem; margin-top: 1.2rem; }
+.ar-swatches__title { font-weight: 800; font-size: .76rem; letter-spacing: .18em; text-transform: uppercase; color: var(--lv-amber); margin-right: .2rem; }
+.ar-sw { display: inline-flex; align-items: center; gap: .5rem; }
+.ar-sw i {
+  width: 34px; height: 34px; border-radius: 50%; background: var(--c);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .08), 0 4px 10px rgba(0, 0, 0, .1);
+  transition: transform .35s cubic-bezier(.3, 1.6, .5, 1);
+}
+.ar-sw:hover i { transform: scale(1.25); }
+.ar-sw code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: .78rem; color: #6b5d50; }
+
+.ar-quality { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+
+/* ---------- Päätökset: haitari ---------- */
+.ar-decs { display: grid; gap: .6rem; }
+.ar-dec { background: #fff; border: 1px solid var(--lv-line); border-radius: 14px; overflow: hidden; transition: border-color .25s, box-shadow .25s, opacity .75s, transform .75s; }
+.ar-dec[open] { border-color: var(--lv-amber-light); box-shadow: 0 12px 26px rgba(43, 33, 28, .08); }
+.ar-dec summary {
+  list-style: none; cursor: pointer; display: flex; align-items: center; gap: .9rem;
+  padding: .9rem 1.1rem; font-weight: 800; color: var(--lv-ink);
+}
+.ar-dec summary::-webkit-details-marker { display: none; }
+.ar-dec summary::after {
+  content: ''; margin-left: auto; flex-shrink: 0; width: 10px; height: 10px;
+  border-right: 2.5px solid var(--lv-red); border-bottom: 2.5px solid var(--lv-red);
+  transform: rotate(45deg) translateY(-3px); transition: transform .3s;
+}
+.ar-dec[open] summary::after { transform: rotate(225deg) translateY(-2px); }
+.ar-dec summary:hover { color: var(--lv-red); }
+.ar-dec__n { font-family: 'Playfair Display', Georgia, serif; color: var(--lv-amber); font-size: 1.15rem; }
+.ar-dec__body { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: 0 1.1rem 1.1rem 3.3rem; animation: arOpen .4s ease; }
+@keyframes arOpen { from { opacity: 0; transform: translateY(-6px); } }
+.ar-dec__body p { margin: 0; font-size: .93rem; color: #5b4c41; }
+.ar-dec__k { font-size: .7rem !important; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #8E4F4F !important; margin-bottom: .2rem !important; }
+.ar-dec__k--why { color: #3F6F3F !important; }
+
+/* ---------- Mukautuvuus ---------- */
+@media (max-width: 1180px) {
+  .ar-layout { display: block; }
+  .ar-toc { position: static; margin-top: 2.2rem; }
+  .ar-toc ol { display: flex; gap: .4rem; overflow-x: auto; border: 0; padding-bottom: .4rem; scrollbar-width: thin; }
+  .ar-toc a { white-space: nowrap; border: 1px solid var(--lv-line); border-radius: 30px; padding: .35rem .85rem; margin: 0; background: #fff; font-size: .84rem; }
+  .ar-toc a.is-active { padding-left: .85rem; background: var(--lv-red); color: #fff; border-color: var(--lv-red); }
+  .ar-toc a::before { display: none; }
+}
+@media (max-width: 960px) {
+  .ar-hero__inner { grid-template-columns: 1fr; }
+  .ar-stack { justify-self: center; max-width: 380px; margin-top: .5rem; }
+  .ar-principles, .ar-comps, .ar-quality { grid-template-columns: repeat(2, 1fr); }
+  .ar-request, .ar-i18n { grid-template-columns: 1fr; }
+  .ar-boot { position: static; }
+  .ar-cols { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+  .ar-diagram { min-width: 680px; }
+  .ar-scrollhint { display: inline; }
+  .ar-tables, .ar-sec-grid, .ar-two, .ar-ticks--2 { grid-template-columns: 1fr; }
+  .ar-dec__body { grid-template-columns: 1fr; padding-left: 1.1rem; }
+}
+@media (max-width: 560px) {
+  .ar-principles, .ar-comps, .ar-quality { grid-template-columns: 1fr; }
+  .ar-stack { max-width: 320px; }
+  .ar-layer__label { font-size: 17px; }
+}
+
+/* Vähennetty liike: ei animaatioita, kaikki näkyy heti */
+@media (prefers-reduced-motion: reduce) {
+  .ar-grid, .ar-title, .ar-layer, .ar-pipe__num, .ar-table__icon { animation: none !important; }
+  .ar-packet { display: none; }
+  .js [data-reveal], .js .ar-fig .d-node, .js .ar-pipe li, .js .ar-seq .d-msg { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
+  .js .ar-seq .d-draw { stroke-dashoffset: 0 !important; animation: none !important; }
+  .js .ar-pipe:not(.is-in)::after { transform: none; }
+  .ar-fig.is-in .d-flow, .ar-code li, .ar-code li::after, .ar-url code::after { animation: none !important; }
+  html { scroll-behavior: auto; }
+}
+html { scroll-behavior: smooth; }
+
+/* Saavutettavuus (WCAG AA 4.5:1): pienet värilliset tekstit vaalealla taustalla tummemmiksi */
+.ar-toc__title, .ar-swatches__title, .ar-dec__n { color: #8A5E14; }
+.ar-threat__k { color: #9A4848; }

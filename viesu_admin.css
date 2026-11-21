@@ -1,0 +1,49 @@
+/* ============================================================
+   Viesu grāmatas administrācija — käyttää viesu_gramata.css:n
+   perustaa ja muuttujia (ladataan sen JÄLKEEN).
+   ============================================================ */
+
+.ga-body { padding: 0; }
+
+.ga-wrap { width: min(900px, 92vw); margin: clamp(1.5rem, 4vw, 3rem) auto; }
+
+.ga-head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap; margin-bottom: 1.6rem;
+  padding-bottom: 1rem; border-bottom: 3px solid var(--lv-amber);
+}
+.ga-head h1 {
+  font-family: 'Playfair Display', Georgia, serif; color: var(--lv-red);
+  font-size: clamp(1.4rem, 3vw, 2rem); margin: 0;
+}
+.ga-logout {
+  color: var(--lv-red); font-weight: 700; text-decoration: none;
+  border: 2px solid var(--lv-line); border-radius: 30px; padding: .45rem 1.2rem;
+  transition: background .18s, color .18s, border-color .18s;
+}
+.ga-logout:hover { background: var(--lv-red); color: #fff; border-color: var(--lv-red); }
+
+.ga-login { max-width: 360px; margin: 2.5rem auto; display: flex; flex-direction: column; }
+
+.ga-section { margin-bottom: 2.5rem; }
+
+.ga-item {
+  background: #fff; border: 1px solid var(--lv-line); border-radius: 12px;
+  padding: 1rem 1.2rem; margin-bottom: 1rem;
+}
+.ga-item--pending { background: var(--lv-linen); border-left: 4px solid var(--lv-amber); }
+
+.ga-actions { display: flex; gap: .6rem; margin-top: .8rem; flex-wrap: wrap; }
+.ga-actions form { margin: 0; }
+
+.ga-btn {
+  font-family: 'Nunito Sans', sans-serif; font-weight: 700; font-size: .85rem;
+  border: 2px solid var(--lv-line); background: #fff; color: #4A3D34;
+  border-radius: 30px; padding: .45rem 1.15rem; cursor: pointer;
+  transition: background .15s, color .15s, border-color .15s, filter .15s;
+}
+.ga-btn:hover { border-color: #b7a893; }
+.ga-btn--ok { background: var(--gb-ok); border-color: var(--gb-ok); color: #fff; }
+.ga-btn--ok:hover { filter: brightness(.92); }
+.ga-btn--del { color: var(--lv-red); border-color: rgba(158, 27, 50, .4); }
+.ga-btn--del:hover { background: var(--lv-red); color: #fff; border-color: var(--lv-red); }

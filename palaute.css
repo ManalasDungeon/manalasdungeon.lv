@@ -1,0 +1,154 @@
+/* =========================================================
+   Palaute — Kommentoi-nappi etusivulla + ponnahdusikkuna
+   Sama lasikortti-tyyli ja värit kuin manala.css:ssä.
+   ========================================================= */
+
+/* ---- Etusivun palauterivi (linkkilistan alla) ---- */
+.feedback{
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap;
+  gap:10px 16px; margin-top:18px; padding:14px 16px;
+  border:1px solid rgba(228,197,106,.28); border-radius:14px;
+  background:linear-gradient(135deg, rgba(141,32,39,.28), rgba(141,32,39,.08));
+}
+.feedback__text{
+  flex:1 1 200px; font-size:.95rem; line-height:1.45; color:rgba(245,236,224,.86);
+}
+.feedback__text a{color:var(--gold-bright); text-decoration:none; border-bottom:1px solid rgba(228,197,106,.45)}
+.feedback__text a:hover{color:#fff; border-color:#fff}
+.feedback__btn{
+  flex:none; display:inline-flex; align-items:center; gap:8px;
+  padding:9px 18px 9px 14px; border-radius:999px; text-decoration:none;
+  font-family:inherit; font-size:1rem; font-weight:600; letter-spacing:.01em; color:#fff;
+  background:linear-gradient(180deg,var(--red),var(--red-dark));
+  border:1px solid rgba(228,197,106,.55);
+  transition:transform .18s, box-shadow .2s, border-color .2s;
+}
+.feedback__btn svg{width:19px; height:19px; color:var(--gold-bright)}
+.feedback__btn:hover,.feedback__btn:focus-visible{
+  transform:translateY(-2px); border-color:var(--gold-bright);
+  box-shadow:0 10px 24px rgba(0,0,0,.4); outline:none;
+}
+
+/* ---- Ponnahdusikkuna: koko määräytyy sisällön mukaan ---- */
+.fb-dialog{
+  margin:auto; padding:0; border:none; background:transparent; color:#fff;
+  width:min(440px, calc(100vw - 24px));
+  max-height:calc(100vh - 24px); max-height:calc(100dvh - 24px);
+  overflow:visible;
+}
+.fb-dialog::backdrop{
+  background:rgba(10,5,5,.62);
+  backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);
+}
+.fb-dialog[open]{animation:fbIn .28s cubic-bezier(.2,.7,.2,1)}
+.fb-dialog[open]::backdrop{animation:fbFade .28s ease}
+@keyframes fbIn{from{opacity:0; transform:translateY(14px) scale(.98)}to{opacity:1; transform:none}}
+@keyframes fbFade{from{opacity:0}to{opacity:1}}
+
+.fb-box{
+  position:relative;
+  max-height:calc(100vh - 24px); max-height:calc(100dvh - 24px); overflow-y:auto;
+  padding:26px 26px 22px;
+  background:rgba(28,14,14,.94);
+  border:1px solid rgba(228,197,106,.4); border-radius:20px;
+  box-shadow:0 30px 70px rgba(0,0,0,.6);
+  font-family:"EB Garamond", Georgia, serif;
+}
+.fb-x{
+  position:absolute; top:10px; right:14px;
+  background:none; border:none; color:rgba(255,255,255,.55);
+  font-size:1.7rem; line-height:1; cursor:pointer; padding:4px;
+  transition:color .2s;
+}
+.fb-x:hover,.fb-x:focus-visible{color:#fff; outline:none}
+
+/* ---- Sisältö (sama dialogissa ja palaute.php-sivulla) ---- */
+.fb-title{
+  font-family:"Playfair Display", Georgia, serif; font-weight:700;
+  font-size:1.55rem; line-height:1.15; margin:0 28px 8px 0; color:#fff;
+}
+.fb-lead{font-size:1.02rem; line-height:1.5; color:rgba(245,236,224,.86); margin:0 0 16px}
+.fb-form{display:flex; flex-direction:column; gap:12px}
+.fb-field{display:flex; flex-direction:column; gap:5px}
+.fb-label{
+  display:flex; align-items:baseline; gap:6px;
+  font-size:.92rem; font-weight:600; color:var(--gold-bright); letter-spacing:.02em;
+}
+.fb-req{color:#f19a9a}
+.fb-hint{font-weight:400; color:rgba(245,236,224,.55); font-style:italic}
+.fb-count{margin-left:auto; font-weight:400; font-size:.8rem; color:rgba(245,236,224,.5)}
+.fb-count.is-near{color:var(--gold-bright)}
+.fb-form input[type=text],
+.fb-form input[type=email],
+.fb-form textarea{
+  width:100%; font:inherit; font-size:1.02rem; color:#fff;
+  padding:9px 12px; border-radius:10px;
+  background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.2);
+  transition:border-color .2s, background .2s, box-shadow .2s;
+}
+.fb-form textarea{resize:vertical; min-height:110px; line-height:1.45}
+.fb-form input:focus,.fb-form textarea:focus{
+  outline:none; border-color:var(--gold-bright); background:rgba(255,255,255,.09);
+  box-shadow:0 0 0 3px rgba(228,197,106,.18);
+}
+.fb-form [aria-invalid=true]{border-color:#e07a7a}
+
+.fb-err{font-size:.88rem; color:#ffb3b3; line-height:1.35}
+.fb-err[hidden]{display:none}
+.fb-err--top{
+  margin:0 0 12px; padding:8px 12px; border-radius:10px;
+  background:rgba(224,122,122,.14); border:1px solid rgba(224,122,122,.4);
+}
+
+/* Hunajapurkki: piilossa ihmisiltä, näkyy boteille */
+.fb-hp{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden}
+
+.fb-actions{display:flex; justify-content:flex-end; align-items:center; gap:10px; margin-top:4px}
+.fb-send{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  font:inherit; font-size:1rem; font-weight:600; color:#fff; cursor:pointer; text-decoration:none;
+  padding:10px 24px; border-radius:999px;
+  background:linear-gradient(180deg,var(--red),var(--red-dark));
+  border:1px solid rgba(228,197,106,.55);
+  transition:transform .18s, box-shadow .2s, border-color .2s, opacity .2s;
+}
+.fb-send:hover,.fb-send:focus-visible{transform:translateY(-1px); border-color:var(--gold-bright); box-shadow:0 8px 20px rgba(0,0,0,.35); outline:none}
+.fb-send[disabled]{opacity:.65; cursor:wait; transform:none}
+.fb-cancel{
+  font:inherit; font-size:1rem; color:rgba(245,236,224,.75); text-decoration:none; cursor:pointer;
+  background:none; border:1px solid transparent; padding:10px 14px; border-radius:999px;
+  transition:color .2s, border-color .2s;
+}
+.fb-cancel:hover,.fb-cancel:focus-visible{color:#fff; border-color:rgba(255,255,255,.25); outline:none}
+
+.fb-pub{
+  margin:16px 0 0; padding-top:12px; border-top:1px solid rgba(255,255,255,.1);
+  font-size:.9rem; color:rgba(245,236,224,.62); font-style:italic;
+}
+.fb-pub a{color:var(--gold-bright); text-decoration:none; border-bottom:1px solid rgba(228,197,106,.45); font-style:normal}
+.fb-pub a:hover{color:#fff; border-color:#fff}
+
+/* Kiitos-näkymä */
+.fb-thanks{text-align:center; padding:8px 0 4px}
+.fb-thanks[hidden]{display:none}
+.fb-thanks .fb-title{margin:0 0 8px}
+.fb-thanks .fb-lead{margin-bottom:20px}
+.fb-thanks__mark{
+  width:56px; height:56px; margin:0 auto 14px; border-radius:50%;
+  display:grid; place-items:center; font-size:1.7rem; color:#3a0d10;
+  background:var(--gold-bright); box-shadow:0 0 0 6px rgba(228,197,106,.2);
+}
+.fb-view[hidden]{display:none}
+
+/* palaute.php-sivu (ilman JavaScriptiä) */
+.fb-page{width:min(480px,100%); margin:0 auto}
+
+@media (max-width:420px){
+  .fb-box{padding:22px 18px 18px; border-radius:18px}
+  .fb-title{font-size:1.4rem}
+  .feedback{padding:12px 14px}
+  .feedback__btn{width:100%; justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){
+  .fb-dialog[open],.fb-dialog[open]::backdrop{animation:none}
+}

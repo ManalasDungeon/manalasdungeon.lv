@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Ziņas &amp; Ceļojums — dokumentaatio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dokumentaatio.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <span class="eyebrow">Tekninen dokumentaatio</span>
+    <h1>Ziņas &amp; Ceļojums</h1>
+    <p class="sub">Uutiset ja matkablogi — avainkohdat tiiviisti</p>
+    <div class="band"></div>
+  </header>
+
+  <section class="card">
+    <h2>Avainkohdat</h2>
+    <p class="lead">Molemmat sivut rakentuvat saman tietokannan ja hallinnan varaan; ne eroavat vain kategorialla.</p>
+
+    <ul class="keys">
+      <li><b>Yksi taulu, kaksi sivua.</b> Kaikki merkinnät ovat <code>zinas</code>-taulussa; sarake <code>kategorija</code> (<code>'zina'</code> / <code>'celojums'</code>) ratkaisee, näkyykö rivi uutisissa (<code>blogi.php</code>) vai matkablogissa (<code>celojums.php</code>).</li>
+
+      <li><b>Yksi hallinta.</b> <code>blogi_admin.php</code> hoitaa molemmat — lisäys, muokkaus, piilotus ja poisto, kategoria valitaan pudotusvalikosta.</li>
+
+      <li><b>Passkey-kirjautuminen.</b> Admin-sivut avautuvat vain rekisteröidyllä laitteella (WebAuthn / FIDO2) — sormenjälki, kasvot, PIN tai turva-avain, ei salasanaa. Portti <code>passkey/guard.php</code> on jokaisen admin-tiedoston alussa; laitteet hallitaan sivulla <code>/passkey/manage.php</code>.</li>
+
+      <li><b>Turvallisuus.</b> Passkey on sidottu verkkotunnukseen (kalasteluvarma), CSRF-tokenit, prepared statements (PDO), HTML-suojaus (<code>htmlspecialchars</code>) ja kuvakansion PHP-ajon esto.</li>
+
+      <li><b>Kuvat tekstissä.</b> Lyhenne <code>[kuva:tiedosto.jpg]</code> → <code>&lt;figure&gt;</code>-kuva julkisella sivulla → klikattava täyskuva (lightbox). Kuvat kansiossa <code>blogi_kuvat/</code>.</li>
+
+      <li><b>Lightbox.</b> Uutisilla erillinen <code>blogi.js</code>, matkablogilla inline <code>celojums.php</code>:ssä — molemmat tyylittävät overlayn JS:ssä, joten CSS-riippuvuutta ei ole.</li>
+
+      <li><b>Taustakuvat.</b> Kiinteä <code>body::before</code>-kerros (iPad-turvallinen, ei zoombugia) + cache-busting kuvan muokkausajan mukaan.</li>
+
+      <li><b>Kolmikielisyys.</b> Kieli valitaan <code>?lang=</code>-parametrilla (lv / en / fi), latvia oletuksena.</li>
+
+      <li><b>Etusivun uutuusmerkki.</b> Kytkeytyy uutisiin selaimen <code>localStorage</code>-aikaleiman (<code>zina_seen_ts</code>) kautta — merkki näkyy, kunnes kävijä avaa uusimman ziņan.</li>
+    </ul>
+  </section>
+
+  <footer>
+    &copy; 2026 <a href="https://manalasdungeon.lv">Marko Nakari</a> &middot; Manalas Dungeon
+  </footer>
+
+</div>
+</body>
+</html>

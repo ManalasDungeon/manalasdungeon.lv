@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://manalasdungeon.lv/</loc>
+    <xhtml:link rel="alternate" hreflang="lv" href="https://manalasdungeon.lv/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://manalasdungeon.lv/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://manalasdungeon.lv/?lang=fi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://manalasdungeon.lv/"/>
+    <lastmod>2026-10-31</lastmod>
+  </url>
+  <url>
+    <loc>https://manalasdungeon.lv/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="lv" href="https://manalasdungeon.lv/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://manalasdungeon.lv/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://manalasdungeon.lv/?lang=fi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://manalasdungeon.lv/"/>
+    <lastmod>2026-10-31</lastmod>
+  </url>
+  <url>
+    <loc>https://manalasdungeon.lv/?lang=fi</loc>
+    <xhtml:link rel="alternate" hreflang="lv" href="https://manalasdungeon.lv/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://manalasdungeon.lv/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://manalasdungeon.lv/?lang=fi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://manalasdungeon.lv/"/>
+    <lastmod>2026-10-31</lastmod>
+  </url>
+  <url>
+    <loc>https://manalasdungeon.lv/blogi.php</loc>
+    <xhtml:link rel="alternate" hreflang="lv" href="https://manalasdungeon.lv/blogi.php"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://manalasdungeon.lv/blogi.php?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://manalasdungeon.lv/blogi.php?lang=fi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://manalasdungeon.lv/blogi.php"/>
+    <lastmod>2026-10-31</lastmod>
+  </url>
+  <url>
+    <loc>https://manalasdungeon.lv/blogi.php?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="lv" href="https://manalasdungeon.lv/blogi.php"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://manalasdungeon.lv/blogi.php?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://manalasdungeon.lv/blogi.php?lang=fi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://manalasdungeon.lv/blogi.php"/>
+    <lastmod>2026-10-31</lastmod>
+  </url>
+  <url>
+    <loc>https://manalasdungeon.lv/blogi.php?lang=fi</loc>
+    <xhtml:link rel="alternate" hreflang="lv" href="https://manalasdungeon.lv/blogi.php"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://manalasdungeon.lv/blogi.php?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://manalasdungeon.lv/blogi.php?lang=fi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://manalasdungeon.lv/blogi.php"/>
+    <lastmod>2026-10-31</lastmod>
+  </url>
+  <url>
+    <loc>https://manalasdungeon.lv/celojums.php</loc>
+    <xhtml:link rel="alternate" hreflang="lv" href="https://manalasdungeon.lv/celojums.php"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://manalasdungeon.lv/celojums.php?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://manalasdungeon.lv/celojums.php?lang=fi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://manalasdungeon.lv/celojums.php"/>
+    <lastmod>2026-10-31</lastmod>
+  </url>
+  <url>
+    <loc>https://manalasdungeon.lv/celojums.php?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="lv" href="https://manalasdungeon.lv/celojums.php"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://manalasdungeon.lv/celojums.php?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://manalasdungeon.lv/celojums.php?lang=fi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://manalasdungeon.lv/celojums.php"/>
+    <lastmod>2026-10-31</lastmod>
+  </url>
+  <url>
+    <loc>https://manalasdungeon.lv/celojums.php?lang=fi</loc>
+    <xhtml:link rel="alternate" hreflang="lv" href="https://manalasdungeon.lv/celojums.php"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://manalasdungeon.lv/celojums.php?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://manalasdungeon.lv/celojums.php?lang=fi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://manalasdungeon.lv/celojums.php"/>
+    <lastmod>2026-10-31</lastmod>
+  </url>
+  <url>
+    <loc>https://manalasdungeon.lv/viesu_gramata.php</loc>
+    <lastmod>2026-10-31</lastmod>
+  </url>
+</urlset>

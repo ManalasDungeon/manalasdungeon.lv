@@ -1,0 +1,184 @@
+/* ============================================================
+   Linkit — linkkipuu (link in bio)
+   Sama latvialainen teema kuin muilla sivuilla: viininpunainen, kulta, kerma.
+   Puhelin ensin: yksi kapea sarake.
+   ============================================================ */
+
+:root {
+  --lv-red:         #9E1B32;
+  --lv-red-dark:    #6E1223;
+  --lv-wine:        #3a0913;
+  --lv-amber:       #C08A2E;
+  --lv-amber-light: #E4C77A;
+  --lv-cream:       #FBF7F0;
+  --lk-card:        rgba(26, 6, 11, .72);
+  --lk-line:        rgba(228, 199, 122, .32);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+.lk-body {
+  margin: 0; min-height: 100vh; min-height: 100svh;
+  color: var(--lv-cream);
+  font-family: 'Nunito Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+  background: var(--lv-wine);
+  padding: clamp(3.6rem, 8vh, 5rem) max(16px, env(safe-area-inset-right, 0px)) 3rem max(16px, env(safe-area-inset-left, 0px));
+  position: relative;
+}
+/* Sumennettu banneri koko sivun taustana + tumma liukuväri päälle */
+.lk-body::before {
+  content: ''; position: fixed; inset: 0; z-index: -2;
+  background: var(--lk-bg) center / cover no-repeat;
+  transform: scale(1.1);
+}
+.lk-body::after {
+  content: ''; position: fixed; inset: 0; z-index: -1;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(228,199,122,.14) 0%, rgba(228,199,122,0) 70%),
+    linear-gradient(180deg, rgba(40,8,15,.55) 0%, rgba(40,8,15,.82) 55%, rgba(26,5,10,.95) 100%);
+}
+
+/* ---------- Kielivalitsin (sama pilleri kuin muilla sivuilla) ---------- */
+.lk-lang {
+  position: fixed; top: calc(16px + env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); z-index: 20;
+  display: flex; gap: .15rem; background: rgba(20, 10, 10, .55);
+  border: 1px solid rgba(255, 255, 255, .25); border-radius: 30px; padding: .2rem;
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+  transform: translateZ(0);
+}
+.lk-lang a {
+  color: var(--lv-cream); text-decoration: none; font-weight: 700; font-size: .78rem;
+  letter-spacing: .04em; padding: .3rem .6rem; border-radius: 20px; opacity: .72; transition: .2s;
+}
+.lk-lang a:hover { opacity: 1; }
+.lk-lang a.active { background: var(--lv-red); opacity: 1; color: #fff; }
+
+/* ---------- Kortti ---------- */
+.lk-card {
+  width: min(540px, 100%); margin: 0 auto;
+  background: var(--lk-card);
+  border: 1px solid var(--lk-line); border-radius: 26px;
+  box-shadow: 0 30px 70px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.06);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  overflow: hidden;
+  padding-bottom: 1.6rem;
+}
+
+.lk-head { position: relative; text-align: center; padding: 0 1.4rem; }
+.lk-cover {
+  display: block; width: calc(100% + 2.8rem); max-width: none; height: auto; margin: 0 -1.4rem;
+  aspect-ratio: 1200 / 360; object-fit: cover;
+  border-bottom: 3px solid var(--lv-amber);
+}
+/* Monogrammi-avatar kansikuvan reunalla */
+.lk-avatar {
+  width: 104px; height: 104px; margin: -54px auto 0; position: relative; z-index: 1;
+  border-radius: 50%; display: grid; place-items: center;
+  background: radial-gradient(circle at 35% 30%, #8a1a2e 0%, var(--lv-red-dark) 55%, #2a060d 100%);
+  border: 3px solid var(--lv-amber-light);
+  box-shadow: 0 0 0 6px rgba(228,199,122,.16), 0 12px 28px rgba(0,0,0,.5);
+}
+.lk-avatar span {
+  font-family: 'Great Vibes', 'Playfair Display', Georgia, cursive; font-size: 4.2rem; line-height: 1;
+  padding: .08em .2em .22em; margin: -.04em 0 -.12em;   /* tilaa käsialan kaarille (background-clip) */
+  background: linear-gradient(180deg, #FBEFC4 0%, #EACE82 35%, #C9962F 70%, #9A6A1C 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: #C9962F;
+}
+.lk-name {
+  margin: .8rem 0 .15rem;
+  font-family: 'Playfair Display', Georgia, serif; font-weight: 700;
+  font-size: clamp(1.7rem, 6vw, 2.1rem); line-height: 1.15; letter-spacing: .01em;
+  color: #fff; text-wrap: balance;
+}
+.lk-role {
+  margin: 0; font-size: .78rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--lv-amber-light);
+}
+.lk-tagline { margin: .55rem auto 0; max-width: 30em; color: rgba(251,247,240,.82); font-size: .98rem; }
+
+/* ---------- Ryhmät ja linkit ---------- */
+.lk-group { padding: 0 1.4rem; margin-top: 1.6rem; }
+.lk-group__title {
+  margin: 0 0 .7rem; display: flex; align-items: center; gap: .7rem;
+  font-size: .72rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--lv-amber);
+}
+.lk-group__title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--lk-line), transparent); }
+
+.lk-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
+.lk-link {
+  display: flex; align-items: center; gap: .9rem; min-height: 60px;
+  padding: .7rem 1rem .7rem .8rem; border-radius: 16px; text-decoration: none; color: var(--lv-cream);
+  background: rgba(255,255,255,.05); border: 1px solid var(--lk-line);
+  transition: background .2s, border-color .2s, transform .2s, box-shadow .2s;
+}
+.lk-link:hover, .lk-link:focus-visible {
+  background: rgba(158,27,50,.42); border-color: var(--lv-amber-light);
+  transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,.35);
+}
+.lk-link:focus-visible { outline: 2px solid var(--lv-amber-light); outline-offset: 2px; }
+.lk-link__icon {
+  flex: none; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center;
+  color: var(--lv-amber-light); background: rgba(0,0,0,.22); border: 1px solid rgba(228,199,122,.22);
+}
+.lk-link__icon svg { width: 21px; height: 21px; }
+.lk-link__text { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.lk-link__label { font-weight: 700; font-size: 1.02rem; }
+.lk-link__sub { font-size: .84rem; color: rgba(251,247,240,.68); }
+.lk-link__arrow { flex: none; color: var(--lv-amber-light); font-size: 1.1rem; opacity: .8; transition: transform .2s; }
+.lk-link:hover .lk-link__arrow { transform: translateX(3px); }
+
+/* Pääkohde (portfolio): kultainen */
+.lk-link--main {
+  background: linear-gradient(135deg, #f6e3a8 0%, #E4C77A 40%, #C08A2E 100%);
+  border-color: transparent; color: var(--lv-wine);
+  box-shadow: 0 10px 26px rgba(192,138,46,.28);
+}
+.lk-link--main .lk-link__sub { color: rgba(58,9,19,.75); }
+.lk-link--main .lk-link__icon { color: var(--lv-wine); background: rgba(255,255,255,.35); border-color: rgba(58,9,19,.18); }
+.lk-link--main .lk-link__arrow { color: var(--lv-wine); }
+.lk-link--main:hover, .lk-link--main:focus-visible {
+  background: linear-gradient(135deg, #fbefc4 0%, #EACE82 40%, #C9962F 100%);
+  box-shadow: 0 14px 32px rgba(192,138,46,.4);
+}
+
+/* Sähköposti + kopiointi */
+.lk-mail {
+  display: flex; align-items: center; gap: .9rem; padding: .7rem .8rem; border-radius: 16px;
+  background: rgba(0,0,0,.2); border: 1px dashed var(--lk-line);
+}
+.lk-mail__text { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.lk-mail__addr { font-weight: 700; overflow-wrap: break-word; user-select: all; }
+.lk-copy {
+  flex: none; cursor: pointer; font: inherit; font-weight: 700; font-size: .85rem;
+  color: var(--lv-wine); background: var(--lv-amber-light); border: 0; border-radius: 30px;
+  padding: .45rem .95rem; transition: background .2s;
+}
+.lk-copy:hover { background: #f3dc9c; }
+.lk-copy:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.lk-copy.is-done { background: #9fd3a8; }
+
+/* QR + alatunniste */
+.lk-qr { margin: 1.8rem auto 0; text-align: center; }
+.lk-qr img { width: 132px; height: 132px; border-radius: 10px; display: block; margin: 0 auto; }
+.lk-qr figcaption { margin-top: .5rem; font-size: .8rem; color: rgba(251,247,240,.65); }
+.lk-foot { margin-top: 1.2rem; text-align: center; font-size: .8rem; color: rgba(251,247,240,.55); }
+.lk-foot a { color: var(--lv-amber-light); text-decoration: none; }
+.lk-foot a:hover { text-decoration: underline; }
+
+@media (max-width: 560px) {
+  .lk-cover { aspect-ratio: 12 / 5; object-position: 50% 50%; }   /* puhelimessa korkeampi kansikuva */
+  .lk-avatar { width: 86px; height: 86px; margin-top: -40px; }
+  .lk-avatar span { font-size: 3.5rem; }
+}
+@media (max-width: 400px) {
+  .lk-group, .lk-head { padding-left: 1rem; padding-right: 1rem; }
+  .lk-cover { width: calc(100% + 2rem); margin: 0 -1rem; }
+  .lk-link { padding-right: .8rem; gap: .75rem; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* Saavutettavuus: alatunnisteen linkki erottuu muustakin kuin väristä */
+.lk-foot a { text-decoration: underline; text-underline-offset: 3px; }
