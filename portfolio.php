@@ -341,7 +341,7 @@ $ICON_KEY   = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
     <div class="pf-cta">
       <a class="pf-btn pf-btn--gold" href="<?= h($homeUrl) ?>"><?= h($T['cta_site']) ?> &rarr;</a>
       <a class="pf-btn pf-btn--ghost" href="<?= h($archUrl) ?>"><?= h($T['l_arch']) ?></a>
-      <a class="pf-btn pf-btn--ghost" href="https://github.com/ManalasDungeon" target="_blank" rel="noopener">GitHub</a>
+      <a class="pf-btn pf-btn--ghost" href="https://github.com/ManalasDungeon/manalasdungeon.lv" target="_blank" rel="noopener">GitHub</a>
     </div>
     <p class="pf-byline">Marko Nakari · <?= h($T['role']) ?></p>
   </div>
@@ -418,7 +418,7 @@ $ICON_KEY   = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
       <a class="pf-btn pf-btn--ghost" href="<?= h($vidzemeUrl) ?>"><?= h($T['l_vidzeme']) ?></a>
       <a class="pf-btn pf-btn--ghost" href="<?= h($jogaUrl) ?>"><?= h($T['l_joga']) ?></a>
       <a class="pf-btn pf-btn--ghost" href="<?= h($archUrl) ?>"><?= h($T['l_arch']) ?></a>
-      <a class="pf-btn pf-btn--ghost" href="https://github.com/ManalasDungeon" target="_blank" rel="noopener">GitHub</a>
+      <a class="pf-btn pf-btn--ghost" href="https://github.com/ManalasDungeon/manalasdungeon.lv" target="_blank" rel="noopener">GitHub</a>
     </div>
   </div>
 </section>

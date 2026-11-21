@@ -888,7 +888,7 @@ $navIds = array_keys($T['nav']);
     <div class="pf-live__links">
       <a class="pf-btn pf-btn--gold" href="<?= h($homeUrl) ?>"><?= h($T['l_home']) ?> &rarr;</a>
       <a class="pf-btn pf-btn--ghost" href="<?= h($portfolioUrl) ?>"><?= h($T['cta_pf']) ?></a>
-      <a class="pf-btn pf-btn--ghost" href="https://github.com/ManalasDungeon" target="_blank" rel="noopener">GitHub</a>
+      <a class="pf-btn pf-btn--ghost" href="https://github.com/ManalasDungeon/manalasdungeon.lv" target="_blank" rel="noopener">GitHub</a>
     </div>
   </div>
 </section>
