@@ -50,57 +50,48 @@ $flag    = ['lv' => '🇱🇻', 'en' => '🇬🇧', 'fi' => '🇫🇮'];
 $T = [
   'lv' => [
     'title' => 'Mana — Heinola, Somija',
-    'desc'  => 'Mana no Heinolas — programmatūras izstrādātājs un mediju instruktors. Projekti, bibliotēka un Vitrupes pludmale.',
+    'desc'  => 'Mana no Heinolas — programmatūras izstrādātājs un mediju instruktors. Projekti, portfolio un Vitrupes pludmale.',
     'loc'   => 'Heinola, Somija',
     'jobtitle' => 'Mediju instruktors',
     'org' => 'Heinolas bibliotēka',
     'bio'   => 'Man ir {ika} gadi, <strong>programmatūras izstrādātājs</strong> un mediju instruktors no Heinolas. Veidoju mājaslapas un lietotnes, un sirds mani atkal un atkal velk uz Latvijas Vidzemes krastu.',
-    'l_bird' => 'Putnu atpazīšanas spēle',   'l_bird_sub' => 'Mācies atpazīt putnu sugas',
-    'l_lib'  => 'Manalas bibliotēka',          'l_lib_sub'  => 'Pārlūko manu kolekciju tiešsaistē',
+    'l_pf' => 'Portfolio',                    'l_pf_sub' => 'Projekti un to tehniskais apraksts',
     'l_vitrupe' => 'Vitrupes Pludmale',        'l_vitrupe_sub' => 'Vidzemes krasta fotogalerija',
     'l_blog' => 'Ziņas',                        'l_blog_sub' => 'Jaunumi un pieraksti',
     'l_priv' => 'Privātums', 'l_guest' => 'Viesu grāmata',               'l_guest_sub' => 'Atstāj savu ierakstu',
     'l_vidzeme' => 'Piedzīvo Vidzemi',          'l_vidzeme_sub' => 'Cēsis, Salacgrīva un apkārtne',
-    'l_bird_detail' => 'Putnu atpazīšanas spēle ir programmēšanas uzdevums, kurā apvienots frontend un backend. Pārlūkā darbojas pati spēle un saskarne, bet servera puse rūpējas par putnu attēliem, sugu datiem un rezultātiem.',
-    'l_lib_detail'  => 'Manalas tiešsaistes bibliotēka ir programmēšanas uzdevums, kurā apvienots frontend, backend un datubāzu programmēšana. MySQL tabulas, PDO savienojumi un CRUD operācijas (pievienot, meklēt, labot, dzēst) veido pilnvērtīgu bibliotēkas sistēmu. Tas ir programmatūras izstrādātāja kvalifikācijas diplomdarbs (Vamia).',
     'detail_btn'    => 'Atvērt lapu',
     'l_yoga'  => 'Joga',  'l_yoga_title' => 'Joga — vēsture, filozofija un vinyasa',
     'contact' => 'Kontaktinformācija',
   ],
   'en' => [
     'title' => 'Mana — Heinola, Finland',
-    'desc'  => 'Mana from Heinola — software developer and media instructor. Projects, library and Vitrupe beach.',
+    'desc'  => 'Mana from Heinola — software developer and media instructor. Projects, portfolio and Vitrupe beach.',
     'loc'   => 'Heinola, Finland',
     'jobtitle' => 'Media instructor',
     'org' => 'Heinola library',
     'bio'   => "I'm {ika}, a <strong>software developer</strong> and media instructor from Heinola. I make websites and apps, and my heart keeps pulling me back to the Vidzeme coast of Latvia.",
-    'l_bird' => 'Bird identification game',    'l_bird_sub' => 'Learn to identify bird species',
-    'l_lib'  => 'Manala library',               'l_lib_sub'  => 'Browse my collection online',
+    'l_pf' => 'Portfolio',                    'l_pf_sub' => 'Projects and how they are built',
     'l_vitrupe' => 'Vitrupes Pludmale',         'l_vitrupe_sub' => 'Photo gallery of the Vidzeme coast',
     'l_blog' => 'News',                          'l_blog_sub' => 'Updates and travel notes',
     'l_priv' => 'Privacy', 'l_guest' => 'Guestbook',                    'l_guest_sub' => 'Leave a message',
     'l_vidzeme' => 'Experience Vidzeme',         'l_vidzeme_sub' => 'Cēsis, Salacgrīva & the coast',
-    'l_bird_detail' => 'The bird identification game is a programming exercise that combines frontend and backend. The browser runs the game and interface, while the server side handles the bird images, species data and scores.',
-    'l_lib_detail'  => 'The Manala online library is a programming exercise combining frontend, backend and database programming. MySQL tables, PDO connections and CRUD operations (create, read, update, delete) make up a complete library system. It is the final thesis for my software developer degree (Vamia).',
     'detail_btn'    => 'Open the page',
     'l_yoga'  => 'Yoga',  'l_yoga_title' => 'Yoga — history, philosophy and Vinyasa',
     'contact' => 'Contact',
   ],
   'fi' => [
     'title' => 'Mana — Heinola, Suomi',
-    'desc'  => 'Mana Heinolasta — ohjelmistokehittäjä ja mediaohjaaja. Projektit, kirjasto ja Vitrupen ranta.',
+    'desc'  => 'Mana Heinolasta — ohjelmistokehittäjä ja mediaohjaaja. Projektit, portfolio ja Vitrupen ranta.',
     'loc'   => 'Heinola, Suomi',
     'jobtitle' => 'Medianeuvoja',
     'org' => 'Heinolan kirjasto',
     'bio'   => 'Olen {ika}-vuotias <strong>ohjelmistokehittäjä</strong> ja mediaohjaaja Heinolasta. Teen verkkosivuja ja sovelluksia, ja sydämeni vetää yhä uudelleen Latvian Vidzemen rannikolle.',
-    'l_bird' => 'Lintujen tunnistuspeli',     'l_bird_sub' => 'Opettele tunnistamaan lintulajit',
-    'l_lib'  => 'Manalan verkkokirjasto',      'l_lib_sub'  => 'Selaa kokoelmaani verkossa',
+    'l_pf' => 'Portfolio',                    'l_pf_sub' => 'Projektit ja niiden toteutus',
     'l_vitrupe' => 'Vitrupes Pludmale',        'l_vitrupe_sub' => 'Vidzemen rannikon kuvagalleria',
     'l_blog' => 'Uutiset',                      'l_blog_sub' => 'Päivitykset ja matkamerkinnät',
     'l_priv' => 'Tietosuoja', 'l_guest' => 'Vieraskirja',                 'l_guest_sub' => 'Jätä terveiset',
     'l_vidzeme' => 'Koe elämyksiä',             'l_vidzeme_sub' => 'Cēsis, Salacgrīva ja muu Vidzeme',
-    'l_bird_detail' => 'Lintujen tunnistuspeli on ohjelmointiharjoitus, jossa yhdistyvät frontend ja backend. Selaimessa toimii itse peli ja käyttöliittymä, ja palvelinpuoli huolehtii lintukuvista, lajitiedoista ja tuloksista.',
-    'l_lib_detail'  => 'Manalan verkkokirjasto on ohjelmointiharjoitus, jossa yhdistyvät frontend, backend ja tietokantaohjelmointi. MySQL-taulut, PDO-yhteydet ja CRUD-toiminnot (lisää, hae, muokkaa, poista) muodostavat toimivan kirjastojärjestelmän. Se on ohjelmistokehittäjän tutkinnon opinnäytetyö (Vamia).',
     'detail_btn'    => 'Siirry sivulle',
     'l_yoga'  => 'Jooga', 'l_yoga_title' => 'Jooga — historia, filosofia ja vinyasa',
     'contact' => 'Yhteystiedot',
@@ -110,6 +101,7 @@ $L = $T[$lang];
 $L['bio'] = str_replace('{ika}', (string)$age, $L['bio']); // ikä esittelytekstiin
 
 function purl(string $lg): string { return page_url('', $lg); }
+$portfolioUrl = $base . 'portfolio.php' . ($lang === 'lv' ? '' : '?lang=' . $lang);
 $vitrupeUrl = $base . 'vitrupe/' . ($lang === 'lv' ? '' : $lang . '/');
 $blogUrl    = $base . 'blogi.php' . ($lang === 'lv' ? '' : '?lang=' . $lang);
 $vidzemeUrl = $base . 'vidzeme.php' . ($lang === 'lv' ? '' : '?lang=' . $lang);
@@ -139,16 +131,14 @@ if ($latestTs > 0) {
 
 /* Linkit ikoneineen (pienet inline-SVG:t) */
 $icons = [
-  'bird' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 7h.01"/><path d="M3.4 18H12a8 8 0 0 0 8-8V7a4 4 0 0 0-7.28-2.3L2 20"/><path d="m20 7 2 .5-2 .5"/><path d="M10 18v3"/><path d="M14 17.75V21"/><path d="M7 18a6 6 0 0 1-3.84-10.22"/></svg>',
-  'lib'  => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+  'case' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M2 13h20"/><path d="M12 12v2"/></svg>',
   'wave' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg>',
   'news' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8V6z"/></svg>',
   'pen'  => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
   'map'  => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>',
 ];
 $links = [
-  ['url' => 'https://www.manalasdungeon.lv/birdgame/',       'label' => $L['l_bird'],    'sub' => $L['l_bird_sub'],    'icon' => $icons['bird'], 'detail' => $L['l_bird_detail']],
-  ['url' => 'https://www.manalasdungeon.lv/verkkokirjasto/', 'label' => $L['l_lib'],     'sub' => $L['l_lib_sub'],     'icon' => $icons['lib'],  'detail' => $L['l_lib_detail']],
+  ['url' => $portfolioUrl,                                    'label' => $L['l_pf'],      'sub' => $L['l_pf_sub'],      'icon' => $icons['case']],
   ['url' => $vitrupeUrl,                                      'label' => $L['l_vitrupe'], 'sub' => $L['l_vitrupe_sub'], 'icon' => $icons['wave']],
   ['url' => $blogUrl,                                         'label' => $L['l_blog'],    'sub' => $L['l_blog_sub'],    'icon' => $icons['news'], 'ts' => $latestTs, 'date' => $latestDate],
   ['url' => $vidzemeUrl,                                      'label' => $L['l_vidzeme'], 'sub' => $L['l_vidzeme_sub'], 'icon' => $icons['map']],
