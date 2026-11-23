@@ -2,9 +2,18 @@
 /* PHP:n kehityspalvelimen reititin: jäljittelee .htaccess-sääntöjä, joita php -S ei lue. */
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $root = $_SERVER['DOCUMENT_ROOT'];
-if (preg_match('#^/linkit/?$#', $path)) {            // RewriteRule ^linkit/?$ linkit.php [L,QSA]
-    $_SERVER['SCRIPT_NAME'] = '/linkit.php';
-    require $root . '/linkit.php';
+/* Siistit osoitteet: /blogi → blogi.php (RewriteRule ^(…)$ $1.php [L,QSA]) */
+$siistit = 'arhitektura|blogi|celojums|joga|linkit|palaute|portfolio|privatums|rss|vidzeme|viesu_gramata';
+if (preg_match('#^/(' . $siistit . ')/$#', $path, $m)) {          // /blogi/ → 301 /blogi
+    $qs = $_SERVER['QUERY_STRING'] ?? '';
+    header('Location: /' . $m[1] . ($qs !== '' ? '?' . $qs : ''), true, 301);
+    return true;
+}
+if (preg_match('#^/(' . $siistit . ')$#', $path, $m)) {
+    $_SERVER['SCRIPT_NAME'] = '/' . $m[1] . '.php';
+    $_SERVER['SCRIPT_FILENAME'] = $root . '/' . $m[1] . '.php';
+    chdir($root);
+    require $root . '/' . $m[1] . '.php';
     return true;
 }
 if ($path === '/') { require $root . '/index.php'; return true; }

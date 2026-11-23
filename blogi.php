@@ -18,8 +18,8 @@ $TT = [
 $T = $TT[$lang];
 
 function home_url(string $lg): string { return page_url('', $lg); }
-function blog_url(string $lg): string { return page_url('blogi.php', $lg); }
-function celojums_url(string $lg): string { return page_url('celojums.php', $lg); }
+function blog_url(string $lg): string { return page_url('blogi', $lg); }
+function celojums_url(string $lg): string { return page_url('celojums', $lg); }
 
 /* Renderöi uutistekstin: suojaa HTML, muuttaa [kuva:tiedosto.jpg] kuvaksi. */
 function render_teksts(string $t): string {
@@ -67,7 +67,7 @@ $latestTs = (int) db()->query(
 <meta property="og:url" content="<?= e(blog_url($lang)) ?>">
 <meta property="og:image" content="<?= e($base) ?>images/blogi_bg.jpg">
 <meta property="og:locale" content="<?= e($T['loc']) ?>">
-<link rel="alternate" type="application/rss+xml" title="Manas ziņas — RSS" href="<?= e($base) ?>rss.php">
+<link rel="alternate" type="application/rss+xml" title="Manas ziņas — RSS" href="<?= e($base) ?>rss">
 <?= head_fonts('playfair-display-latin-wght-normal.woff2', '') ?><link rel="stylesheet" href="<?= e(asset('blogi.css')) ?>">
 </head>
 <body data-zina-ts="<?= (int)$latestTs ?>" style="--blogi-bg:url(<?= asset('images/blogi_bg.webp') ?>); --blogi-bg-m:url(<?= asset('images/blogi_bg_m.webp') ?>)">
@@ -104,7 +104,7 @@ $latestTs = (int) db()->query(
   </div>
 
   <footer class="zinas-footer">
-    &copy; <a href="https://manalasdungeon.lv">Marko Nakari</a> &middot; Manalas Dungeon &middot; <a href="<?= e($base) ?>rss.php">RSS</a>
+    &copy; <a href="https://manalasdungeon.lv">Marko Nakari</a> &middot; Manalas Dungeon &middot; <a href="<?= e($base) ?>rss">RSS</a>
   </footer>
 
   <script src="<?= e(asset('blogi.js')) ?>" defer></script>

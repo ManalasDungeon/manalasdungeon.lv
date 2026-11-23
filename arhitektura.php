@@ -18,10 +18,10 @@ $base   = 'https://manalasdungeon.lv/';
 $flag   = ['lv' => '🇱🇻', 'en' => '🇬🇧', 'fi' => '🇫🇮'];
 $locale = ['lv' => 'lv_LV', 'en' => 'en_US', 'fi' => 'fi_FI'];
 
-function ar_url(string $lg): string { return page_url('arhitektura.php', $lg); }
+function ar_url(string $lg): string { return page_url('arhitektura', $lg); }
 $q            = $lang === $default ? '' : '?lang=' . $lang;
 $homeUrl      = $base . $q;
-$portfolioUrl = $base . 'portfolio.php' . $q;
+$portfolioUrl = $base . 'portfolio' . $q;
 $ogImage      = $base . 'images/portfolio_linkedin.jpg';
 
 /* ===================================================================
@@ -55,7 +55,7 @@ $TT = [
   'request_lead' => 'Katrs pieprasījums iziet cauri .htaccess noteikumiem no augšas uz leju, pirms sāk darboties PHP. Secība ir svarīga.',
   'request' => [
     ['Viena adrese', 'HTTP un www tiek pāradresēti ar 301 uz vienu kanonisko HTTPS adresi.'],
-    ['Tīri URL', 'Piemēram, /linkit iekšēji atver linkit.php; vecā adrese saņem 301 pāradresāciju, un nosacījums novērš cilpu.'],
+    ['Tīri URL', 'Visām lapām ir adreses bez .php: /blogi iekšēji atver blogi.php; vecā adrese saņem 301 pāradresāciju (tikai GET, lai formas nepazūd), un nosacījums novērš cilpu.'],
     ['Apstrāde', 'PHP apstrādā lapas; noklusējuma lapa ir index.php.'],
     ['Kešatmiņa', 'CSS, JS un fonti — gads, attēli — nedēļa, HTML — vienmēr svaigs.'],
     ['Saspiešana', 'gzip visiem teksta formātiem: HTML, CSS, JS, JSON, SVG un XML.'],
@@ -181,7 +181,7 @@ $TT = [
   'request_lead' => 'Every request passes the .htaccess rules top to bottom before PHP runs. The order matters.',
   'request' => [
     ['One address', 'HTTP and www get a 301 to one canonical HTTPS address.'],
-    ['Clean URLs', '/linkit, for example, opens linkit.php internally; the old address gets a 301, and a condition prevents a loop.'],
+    ['Clean URLs', 'Every page has an address without .php: /blogi opens blogi.php internally; the old address gets a 301 (GET only, so form posts are not lost), and a condition prevents a loop.'],
     ['Handlers', 'PHP handles the pages; the default page is index.php.'],
     ['Browser cache', 'CSS, JS and fonts: a year. Images: a week. HTML: always fresh.'],
     ['Compression', 'gzip for every text format: HTML, CSS, JS, JSON, SVG and XML.'],
@@ -307,7 +307,7 @@ $TT = [
   'request_lead' => 'Jokainen pyyntö kulkee .htaccess-sääntöjen läpi ylhäältä alas ennen kuin PHP käynnistyy. Järjestyksellä on väliä.',
   'request' => [
     ['Yksi osoite', 'HTTP ja www ohjataan 301-ohjauksella yhteen kanoniseen HTTPS-osoitteeseen.'],
-    ['Siistit osoitteet', 'Esimerkiksi /linkit avaa sisäisesti linkit.php:n; vanha osoite saa 301-ohjauksen, ja ehto estää silmukan.'],
+    ['Siistit osoitteet', 'Kaikilla sivuilla on osoite ilman .php-päätettä: /blogi avaa sisäisesti blogi.php:n; vanha osoite saa 301-ohjauksen (vain GET, jotta lomakkeiden lähetykset eivät katoa), ja ehto estää silmukan.'],
     ['Käsittely', 'PHP käsittelee sivut; oletussivu on index.php.'],
     ['Välimuisti', 'CSS, JS ja fontit vuoden, kuvat viikon, HTML aina tuoreena.'],
     ['Pakkaus', 'gzip kaikille tekstimuodoille: HTML, CSS, JS, JSON, SVG ja XML.'],
@@ -691,7 +691,7 @@ $navIds = array_keys($T['nav']);
       <div class="ar-i18n">
         <div class="ar-urls" data-reveal aria-hidden="true">
           <?php foreach (['lv' => '', 'en' => '?lang=en', 'fi' => '?lang=fi'] as $lg => $qs): ?>
-          <div class="ar-url<?= $lg === $lang ? ' is-current' : '' ?>"><span class="ar-url__flag"><?= $flag[$lg] ?></span><code>/arhitektura.php<b><?= h($qs) ?></b></code></div>
+          <div class="ar-url<?= $lg === $lang ? ' is-current' : '' ?>"><span class="ar-url__flag"><?= $flag[$lg] ?></span><code>/arhitektura<b><?= h($qs) ?></b></code></div>
           <?php endforeach; ?>
         </div>
         <dl class="ar-dl">

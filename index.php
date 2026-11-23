@@ -101,13 +101,13 @@ $L = $T[$lang];
 $L['bio'] = str_replace('{ika}', (string)$age, $L['bio']); // ikä esittelytekstiin
 
 function purl(string $lg): string { return page_url('', $lg); }
-$portfolioUrl = $base . 'portfolio.php' . ($lang === 'lv' ? '' : '?lang=' . $lang);
+$portfolioUrl = $base . 'portfolio' . ($lang === 'lv' ? '' : '?lang=' . $lang);
 $vitrupeUrl = $base . 'vitrupe/' . ($lang === 'lv' ? '' : $lang . '/');
-$blogUrl    = $base . 'blogi.php' . ($lang === 'lv' ? '' : '?lang=' . $lang);
-$vidzemeUrl = $base . 'vidzeme.php' . ($lang === 'lv' ? '' : '?lang=' . $lang);
-$jogaUrl    = $base . 'joga.php' . ($lang === 'lv' ? '' : '?lang=' . $lang);
-$guestUrl   = 'viesu_gramata.php' . ($lang === 'lv' ? '' : '?lang=' . $lang);
-$fbUrl      = 'palaute.php' . ($lang === 'lv' ? '' : '?lang=' . $lang);
+$blogUrl    = $base . 'blogi' . ($lang === 'lv' ? '' : '?lang=' . $lang);
+$vidzemeUrl = $base . 'vidzeme' . ($lang === 'lv' ? '' : '?lang=' . $lang);
+$jogaUrl    = $base . 'joga' . ($lang === 'lv' ? '' : '?lang=' . $lang);
+$guestUrl   = 'viesu_gramata' . ($lang === 'lv' ? '' : '?lang=' . $lang);
+$fbUrl      = 'palaute' . ($lang === 'lv' ? '' : '?lang=' . $lang);
 /* Palautelomakkeen tekstit (sama tiedosto kuin palaute.php:ssä) */
 $P = (require __DIR__ . '/palaute_tekstit.php')[$lang];
 $guestLink = fn(string $cls = '') => '<a' . ($cls ? ' class="' . $cls . '"' : '') . ' href="' . e($guestUrl) . '">' . e($P['guest_in']) . '</a>';
@@ -142,7 +142,7 @@ $links = [
   ['url' => $vitrupeUrl,                                      'label' => $L['l_vitrupe'], 'sub' => $L['l_vitrupe_sub'], 'icon' => $icons['wave']],
   ['url' => $blogUrl,                                         'label' => $L['l_blog'],    'sub' => $L['l_blog_sub'],    'icon' => $icons['news'], 'ts' => $latestTs, 'date' => $latestDate],
   ['url' => $vidzemeUrl,                                      'label' => $L['l_vidzeme'], 'sub' => $L['l_vidzeme_sub'], 'icon' => $icons['map']],
-  ['url' => 'viesu_gramata.php',                              'label' => $L['l_guest'],   'sub' => $L['l_guest_sub'],   'icon' => $icons['pen']],
+  ['url' => 'viesu_gramata',                              'label' => $L['l_guest'],   'sub' => $L['l_guest_sub'],   'icon' => $icons['pen']],
 ];
 ?>
 <!DOCTYPE html>
@@ -285,7 +285,7 @@ $ld = [
     </main>
 
     <!-- Palaute-ponnahdusikkuna (avautuu Kommentoi-napista; ilman JS:ää nappi vie palaute.php-sivulle) -->
-    <dialog class="fb-dialog" id="palaute" aria-labelledby="fb-title" data-token-url="palaute.php?token=1"
+    <dialog class="fb-dialog" id="palaute" aria-labelledby="fb-title" data-token-url="palaute?token=1"
             data-e-name="<?= e($P['e_name']) ?>" data-e-email="<?= e($P['e_email']) ?>" data-e-msg="<?= e($P['e_msg']) ?>" data-e-net="<?= e($P['e_send']) ?>">
         <div class="fb-box">
             <button class="fb-x" type="button" data-fb-close aria-label="<?= e($P['close']) ?>">&times;</button>
@@ -293,7 +293,7 @@ $ld = [
                 <h2 class="fb-title" id="fb-title"><?= e($P['title']) ?></h2>
                 <p class="fb-lead"><?= e($P['lead']) ?></p>
                 <p class="fb-err fb-err--top" data-fb-err="_" role="alert" hidden></p>
-                <form class="fb-form" method="post" action="palaute.php" novalidate>
+                <form class="fb-form" method="post" action="palaute" novalidate>
                     <input type="hidden" name="csrf" value="">
                     <input type="hidden" name="lang" value="<?= e($lang) ?>">
                     <div class="fb-hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
@@ -332,7 +332,7 @@ $ld = [
     <div class="pagefoot">
         <span id="date_time_container"><span id="date_time"></span></span>
         <span class="pagefoot__links">
-            <a href="<?= e(page_url('privatums.php', $lang)) ?>" class="pagefoot__link"><?= e($L['l_priv']) ?></a>
+            <a href="<?= e(page_url('privatums', $lang)) ?>" class="pagefoot__link"><?= e($L['l_priv']) ?></a>
             <a href="https://portal.nano.lv/aff.php?aff=291" target="_blank" rel="noopener" id="hosting_link">nano.lv</a>
         </span>
     </div>

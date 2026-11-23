@@ -210,7 +210,7 @@ $rows = db()->query(
 
 // Turvallinen tulostus
 // Sivun URL kielellä (lv juuressa, en/fi parametrilla)
-function gb_url(string $lg): string { return page_url('viesu_gramata.php', $lg); }
+function gb_url(string $lg): string { return page_url('viesu_gramata', $lg); }
 // http/https-osoitteet klikattaviksi linkeiksi (teksti suojataan ensin)
 function linkify(string $text): string {
     $safe = h($text);
@@ -225,7 +225,7 @@ function linkify(string $text): string {
     return nl2br($safe);
 }
 $csrf = $_SESSION['csrf'];
-$formAction = 'viesu_gramata.php' . ($lang === $default ? '' : '?lang=' . $lang);
+$formAction = 'viesu_gramata' . ($lang === $default ? '' : '?lang=' . $lang);
 ?>
 <!DOCTYPE html>
 <html lang="<?= $lang ?>">

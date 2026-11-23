@@ -7,7 +7,7 @@ require_once __DIR__ . '/includes/bootstrap.php';   // yhteiset apufunktiot, kie
 
 $lang = site_lang();
 $flag = ['lv' => '🇱🇻', 'en' => '🇬🇧', 'fi' => '🇫🇮'];
-function pr_url(string $lg): string { return page_url('privatums.php', $lg); }
+function pr_url(string $lg): string { return page_url('privatums', $lg); }
 
 const PR_UPDATED = '2026-11-20';
 $CONTACT = 'marko.nakari(at)inbox.lv';

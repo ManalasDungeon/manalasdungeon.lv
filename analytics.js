@@ -84,7 +84,7 @@
   }
 
   function privacyUrl(l) {
-    return '/privatums.php' + (l === 'lv' ? '' : '?lang=' + l);
+    return '/privatums' + (l === 'lv' ? '' : '?lang=' + l);
   }
 
   function ensureCss() {

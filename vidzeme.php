@@ -341,7 +341,7 @@ $CAT_ORDER  = ['eat', 'see', 'nature', 'stay', 'shop'];
 $CAT_LABELS = ['eat' => $T['cat_eat'], 'see' => $T['cat_see'], 'nature' => $T['cat_nature'], 'stay' => $T['cat_stay'], 'shop' => $T['cat_shop']];
 
 /* ---- Apufunktiot ---- */
-function vz_url(string $lg): string { return page_url('vidzeme.php', $lg); }
+function vz_url(string $lg): string { return page_url('vidzeme', $lg); }
 ?>
 <!DOCTYPE html>
 <html lang="<?= $lang ?>">
@@ -512,7 +512,7 @@ function vz_url(string $lg): string { return page_url('vidzeme.php', $lg); }
     <footer class="vz-footer">
         <p class="vz-footer__note"><?= h($T['note']) ?></p>
         <?php $gb = ['lv' => 'Viesu grāmata', 'en' => 'Guestbook', 'fi' => 'Vieraskirja']; ?>
-        <a class="vz-footer-link" href="viesu_gramata.php<?= $lang === $default ? '' : '?lang=' . $lang ?>">
+        <a class="vz-footer-link" href="viesu_gramata<?= $lang === $default ? '' : '?lang=' . $lang ?>">
             <?= h($gb[$lang]) ?> <span class="vz-arrow" aria-hidden="true">&rarr;</span>
         </a>
         <p class="vz-footer__copy">&copy; <a href="https://manalasdungeon.lv">Marko Nakari</a> &middot; <?= h($T['role']) ?></p>

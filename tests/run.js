@@ -291,38 +291,38 @@ async function checkForms(mailDir, haveDb) {
 
   /* Palaute */
   let api = await request.newContext({ baseURL: ORIGIN });
-  let t = (await (await api.get('/palaute.php?token=1')).json()).token;
-  let r = await (await api.post('/palaute.php', { headers: json, form: { csrf: 'väärä', lang: 'fi', name: 'A', msg: 'hei hei' } })).json();
+  let t = (await (await api.get('/palaute?token=1')).json()).token;
+  let r = await (await api.post('/palaute', { headers: json, form: { csrf: 'väärä', lang: 'fi', name: 'A', msg: 'hei hei' } })).json();
   rec('palaute', 'väärä CSRF-tunniste hylätään', r.ok === false && r.errors && r.errors._);
   const seen = new Set(mails());
-  r = await (await api.post('/palaute.php', { headers: json, form: { csrf: t, lang: 'fi', name: 'Botti', msg: 'roskaa', website: 'spam.example' } })).json();
+  r = await (await api.post('/palaute', { headers: json, form: { csrf: t, lang: 'fi', name: 'Botti', msg: 'roskaa', website: 'spam.example' } })).json();
   rec('palaute', 'ansakenttä: näennäinen kiitos, ei postia', r.ok === true && mails().length === seen.size);
   await sleep(3200);                                               // aikaraja 3 s
-  r = await (await api.post('/palaute.php', { headers: json, form: { csrf: t, lang: 'fi', name: '', email: 'ei-osoite', msg: 'x' } })).json();
+  r = await (await api.post('/palaute', { headers: json, form: { csrf: t, lang: 'fi', name: '', email: 'ei-osoite', msg: 'x' } })).json();
   rec('palaute', 'virheelliset kentät hylätään', r.ok === false && r.errors && r.errors.name && r.errors.email && r.errors.msg);
-  r = await (await api.post('/palaute.php', { headers: json, form: { csrf: t, lang: 'lv', name: 'Jānis\r\nBcc: evil@example.com', email: 'janis@example.lv', msg: 'Labdien! Ļoti jauka lapa.' } })).json();
+  r = await (await api.post('/palaute', { headers: json, form: { csrf: t, lang: 'lv', name: 'Jānis\r\nBcc: evil@example.com', email: 'janis@example.lv', msg: 'Labdien! Ļoti jauka lapa.' } })).json();
   const newMail = mails().filter(f => !seen.has(f)).map(f => fs.readFileSync(path.join(mailDir, f), 'utf8')).join('\n');
   rec('palaute', 'kelvollinen viesti lähtee postiin', r.ok === true && newMail.includes('Labdien'), JSON.stringify(r));
   rec('palaute', 'otsakeinjektio ei onnistu', newMail !== '' && !/^Bcc:/mi.test(newMail));
-  t = (await (await api.get('/palaute.php?token=1')).json()).token;
+  t = (await (await api.get('/palaute?token=1')).json()).token;
   await sleep(3200);
-  r = await (await api.post('/palaute.php', { headers: json, form: { csrf: t, lang: 'fi', name: 'A', msg: 'toinen viesti heti perään' } })).json();
+  r = await (await api.post('/palaute', { headers: json, form: { csrf: t, lang: 'fi', name: 'A', msg: 'toinen viesti heti perään' } })).json();
   rec('palaute', 'lähetysraja estää heti seuraavan viestin', r.ok === false && r.errors && r.errors._);
   await api.dispose();
 
   /* Vieraskirja */
   if (!haveDb) { rec('vieraskirja', 'ohitettu (ei testitietokantaa)', true); return; }
   api = await request.newContext({ baseURL: ORIGIN });
-  const page = await (await api.get('/viesu_gramata.php?lang=fi')).text();
+  const page = await (await api.get('/viesu_gramata?lang=fi')).text();
   const csrf = (page.match(/name="csrf" value="([^"]+)"/) || [])[1];
   rec('vieraskirja', 'lomakkeessa on CSRF-tunniste', !!csrf);
   const countRows = () => Number(dbQuery('SELECT COUNT(*) FROM viesu_gramata'));
   const n0 = countRows();
-  await api.post('/viesu_gramata.php?lang=fi', { form: { csrf: 'väärä', nosaukums: 'X', zina: 'Väärällä tunnisteella' } });
+  await api.post('/viesu_gramata?lang=fi', { form: { csrf: 'väärä', nosaukums: 'X', zina: 'Väärällä tunnisteella' } });
   rec('vieraskirja', 'väärä CSRF-tunniste ei tallenna', countRows() === n0);
-  const res = await api.post('/viesu_gramata.php?lang=fi', { form: { csrf, nosaukums: 'Testaaja', zina: 'Uusi testiviesti odottaa moderointia', saite: '', tips: '', website: '' } });
+  const res = await api.post('/viesu_gramata?lang=fi', { form: { csrf, nosaukums: 'Testaaja', zina: 'Uusi testiviesti odottaa moderointia', saite: '', tips: '', website: '' } });
   rec('vieraskirja', 'lähetys tallentuu odottamaan (HTTP ' + res.status() + ')', res.status() === 200 && countRows() === n0 + 1);
-  const after = await (await api.get('/viesu_gramata.php?lang=fi')).text();
+  const after = await (await api.get('/viesu_gramata?lang=fi')).text();
   rec('vieraskirja', 'uusi viesti ei näy ennen hyväksyntää', !after.includes('Uusi testiviesti odottaa moderointia'));
   await api.dispose();
 }

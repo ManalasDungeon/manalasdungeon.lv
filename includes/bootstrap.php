@@ -47,9 +47,17 @@ function asset(string $path): string
     return $path . '?v=' . $v;
 }
 
-/** Kanoninen osoite: page_url('joga.php', 'en') → https://manalasdungeon.lv/joga.php?lang=en */
+/**
+ * Kanoninen osoite: page_url('joga', 'en') → https://manalasdungeon.lv/joga?lang=en
+ * Sivut ovat siistein osoittein ilman .php-päätettä (.htaccess: /joga avaa joga.php:n).
+ * Jos kutsussa on vielä vanha muoto 'joga.php', pääte jätetään pois.
+ */
+const CLEAN_PAGES = ['arhitektura', 'blogi', 'celojums', 'joga', 'linkit', 'palaute', 'portfolio',
+                     'privatums', 'rss', 'vidzeme', 'viesu_gramata'];
 function page_url(string $file, string $lang): string
 {
+    $sivu = preg_replace('/\.php$/', '', $file);
+    if (in_array($sivu, CLEAN_PAGES, true)) $file = $sivu;
     return SITE_URL . $file . ($lang === SITE_DEFAULT_LANG ? '' : '?lang=' . $lang);
 }
 

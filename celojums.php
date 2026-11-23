@@ -24,7 +24,7 @@ $TT = [
 $T = $TT[$lang];
 
 function home_url(string $lg): string { return page_url('', $lg); }
-function trip_url(string $lg): string { return page_url('celojums.php', $lg); }
+function trip_url(string $lg): string { return page_url('celojums', $lg); }
 
 /* Renderöi tekstin: suojaa HTML, muuttaa [kuva:tiedosto.jpg] kuvaksi. */
 function render_teksts(string $t): string {
@@ -114,7 +114,7 @@ $rows = db()->query(
   </main>
 
   <div class="cel-bottom">
-    <a class="cel-btn" href="<?= e($base) ?>viesu_gramata.php"><span class="cel-btn__arrow" aria-hidden="true">&#9998;</span> <?= e($T['guest']) ?></a>
+    <a class="cel-btn" href="<?= e($base) ?>viesu_gramata"><span class="cel-btn__arrow" aria-hidden="true">&#9998;</span> <?= e($T['guest']) ?></a>
   </div>
 
   <footer class="cel-footer">

@@ -12,12 +12,24 @@ RewriteCond %{HTTP_HOST} ^www\. [NC]
 RewriteRule ^ https://manalasdungeon.lv%{REQUEST_URI} [R=301,L]
 
 # ----- Siistit osoitteet -----
-# Linkkisivu: https://manalasdungeon.lv/linkit  (myös /linkit/ ja ?lang=en / ?lang=fi)
-RewriteRule ^linkit/?$ linkit.php [L,QSA]
+# Sivut ilman .php-päätettä: https://manalasdungeon.lv/blogi  (kieliversiot ?lang=en / ?lang=fi)
+# Sama lista on includes/bootstrap.php:n CLEAN_PAGES-vakiossa ja testien reitittimessä.
 
-# Vanha osoite linkit.php → siisti osoite (vain suora pyyntö, ei sisäistä uudelleenkirjoitusta)
-RewriteCond %{THE_REQUEST} \s/linkit\.php[\s?] [NC]
-RewriteRule ^linkit\.php$ https://manalasdungeon.lv/linkit [R=301,L,QSA]
+# 1) Kauttaviiva lopussa → ilman (/blogi/ → /blogi), jotta suhteelliset polut toimivat
+RewriteRule ^(arhitektura|blogi|celojums|joga|linkit|palaute|portfolio|privatums|rss|vidzeme|viesu_gramata)/$ https://manalasdungeon.lv/$1 [R=301,L,QSA]
+
+# 2) Vanha osoite blogi.php → siisti osoite. Vain selaimen suora GET/HEAD-pyyntö:
+#    THE_REQUEST ei muutu sisäisessä uudelleenkirjoituksessa (ei silmukkaa), ja
+#    lomakkeiden POST-lähetykset (palaute.php, viesu_gramata.php) eivät katoa ohjaukseen.
+RewriteCond %{THE_REQUEST} ^(GET|HEAD)\s/(arhitektura|blogi|celojums|joga|linkit|palaute|portfolio|privatums|rss|vidzeme|viesu_gramata)\.php[\s?] [NC]
+RewriteRule ^(arhitektura|blogi|celojums|joga|linkit|palaute|portfolio|privatums|rss|vidzeme|viesu_gramata)\.php$ https://manalasdungeon.lv/$1 [R=301,L,QSA]
+
+# 3) Siisti osoite avaa sisäisesti PHP-tiedoston
+RewriteRule ^(arhitektura|blogi|celojums|joga|linkit|palaute|portfolio|privatums|rss|vidzeme|viesu_gramata)$ $1.php [L,QSA]
+
+# 4) /index.php → / (etusivun yksi osoite)
+RewriteCond %{THE_REQUEST} ^(GET|HEAD)\s/index\.php[\s?] [NC]
+RewriteRule ^index\.php$ https://manalasdungeon.lv/ [R=301,L,QSA]
 
 # .html-tiedostot suoritetaan PHP:nä
 AddHandler application/x-httpd-php html

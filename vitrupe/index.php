@@ -134,7 +134,7 @@ $og_image   = $BASE . 'images/ranta1.jpg';
         </div>
         <div class="lv-links reveal">
           <a class="lv-gb-image lv-gb-image--contain" href="https://tedijs.lv/" aria-label="Tedijs"><img src="images/tedijs.webp" alt="Tedijs" loading="lazy" width="344" height="188"></a>
-          <a class="lv-gb-image" href="https://manalasdungeon.lv/viesu_gramata.php" aria-label="<?= e(t('nav.guestbook')) ?>"><img src="images/viesu_gramata.webp" alt="<?= e(t('nav.guestbook')) ?>" loading="lazy" decoding="async"></a>
+          <a class="lv-gb-image" href="https://manalasdungeon.lv/viesu_gramata" aria-label="<?= e(t('nav.guestbook')) ?>"><img src="images/viesu_gramata.webp" alt="<?= e(t('nav.guestbook')) ?>" loading="lazy" decoding="async"></a>
         </div>
       </div>
     </section>

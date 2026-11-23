@@ -4,7 +4,7 @@
 
 A trilingual personal website with **passwordless administration (WebAuthn / FIDO2 passkeys)**, built from scratch with **PHP 8.4 and MySQL** — no CMS, no framework.
 
-**Live:** [manalasdungeon.lv](https://manalasdungeon.lv) · **Case study:** [manalasdungeon.lv/portfolio.php](https://manalasdungeon.lv/portfolio.php) · **Links:** [manalasdungeon.lv/linkit](https://manalasdungeon.lv/linkit)
+**Live:** [manalasdungeon.lv](https://manalasdungeon.lv) · **Case study:** [manalasdungeon.lv/portfolio](https://manalasdungeon.lv/portfolio) · **Links:** [manalasdungeon.lv/linkit](https://manalasdungeon.lv/linkit)
 
 > 🇱🇻 **Latviski:** Trīsvalodu (latviešu, angļu, somu) personīga vietne ar bezparoles administrēšanu (passkey, WebAuthn / FIDO2). Izstrādāta no nulles ar PHP 8.4 un MySQL bez satura pārvaldības sistēmas.
 >
@@ -26,16 +26,16 @@ A trilingual personal website with **passwordless administration (WebAuthn / FID
 | Page | File | What it is |
 | --- | --- | --- |
 | Home | `index.php` | Entry page with links, language picker, a “new post” badge and a **Comment** button |
-| Feedback | `palaute.php` | Private feedback sent straight to email (pop-up on the home page; also a standalone page without JavaScript) |
-| News (Ziņas) | `blogi.php` | News blog, read from the database |
-| Travel (Ceļojums) | `celojums.php` | Travel blog; same table as news, separated by category |
-| Experience Vidzeme | `vidzeme.php` | Travel guide to Vidzeme: food, sights, nature trails, accommodation — by municipality and town, plus a history section (the three stars of the Freedom Monument, coat of arms, timeline) |
-| Yoga | `joga.php` | History and philosophy of yoga, Vinyasa and Core yoga |
-| Guestbook | `viesu_gramata.php` | Moderated guestbook with spam protection |
-| Portfolio | `portfolio.php` | Public case study of this project |
-| Architecture | `arhitektura.php` | Animated public architecture overview |
-| Privacy | `privatums.php` | Privacy policy with a cookie-choice switch |
-| News feed | `rss.php` | RSS 2.0 feed of the latest news |
+| Feedback | `palaute.php` → `/palaute` | Private feedback sent straight to email (pop-up on the home page; also a standalone page without JavaScript) |
+| News (Ziņas) | `blogi.php` → `/blogi` | News blog, read from the database |
+| Travel (Ceļojums) | `celojums.php` → `/celojums` | Travel blog; same table as news, separated by category |
+| Experience Vidzeme | `vidzeme.php` → `/vidzeme` | Travel guide to Vidzeme: food, sights, nature trails, accommodation — by municipality and town, plus a history section (the three stars of the Freedom Monument, coat of arms, timeline) |
+| Yoga | `joga.php` → `/joga` | History and philosophy of yoga, Vinyasa and Core yoga |
+| Guestbook | `viesu_gramata.php` → `/viesu_gramata` | Moderated guestbook with spam protection |
+| Portfolio | `portfolio.php` → `/portfolio` | Public case study of this project |
+| Architecture | `arhitektura.php` → `/arhitektura` | Animated public architecture overview |
+| Privacy | `privatums.php` → `/privatums` | Privacy policy with a cookie-choice switch |
+| News feed | `rss.php` → `/rss` | RSS 2.0 feed of the latest news |
 | Not found | `404.php` | Custom trilingual 404 page (`ErrorDocument`) |
 | Links | `linkit.php` → `/linkit` | Link-in-bio page with QR code |
 | Vitrupe Beach | `vitrupe/` | Separate travel site with a gallery and lightbox (own `.htaccess`, clean `/en/` and `/fi/` URLs) |
@@ -86,7 +86,7 @@ A trilingual personal website with **passwordless administration (WebAuthn / FID
 
 - **Languages:** each page holds its texts in a PHP array (`$TT['lv' | 'en' | 'fi']`). The language comes from `?lang=` (default Latvian); the Vitrupe site uses clean `/en/` and `/fi/` paths.
 - **One table, two blogs:** news and travel posts share the `zinas` table; the `kategorija` column decides where a post appears. Images are placed in the text with a `[kuva:filename.jpg]` shortcode.
-- **Clean URLs:** `.htaccess` rewrites `/linkit` to `linkit.php` internally and redirects old `linkit.php` links to `/linkit` with a 301.
+- **Clean URLs:** every public page has an address without `.php` (`/blogi`, `/vidzeme`, `/linkit` …). `.htaccess` opens the PHP file internally and redirects old `blogi.php` links to `/blogi` with a 301 — only for GET/HEAD, so form posts to `palaute.php` and `viesu_gramata.php` are never lost in a redirect. The same page list is in `CLEAN_PAGES` (`includes/bootstrap.php`), which `page_url()` uses for canonical and hreflang links, and in the test router.
 - **Cache busting:** CSS, JS and images are linked with `?v=<file modification time>`, so browsers can cache them for a year and still get updates at once.
 - **Feedback pop-up:** a native `<dialog>` sized to its content. The CSRF token is fetched only when the dialog opens (`palaute.php?token=1`), so the home page sets no cookies for ordinary visitors. The form is sent with `fetch` and gets JSON back; without JavaScript the same form works as a normal page. The texts for all three languages are in `palaute_tekstit.php`.
 - **Data-driven pages:** links, timelines and cards are PHP arrays rendered in loops, so adding content is one line of code.

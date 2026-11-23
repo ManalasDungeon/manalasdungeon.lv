@@ -19,9 +19,9 @@
           <a href="<?= e(lurl('kuvat.php')) ?>"><?= t('footer.p_g1') ?></a>
           <a href="<?= e(lurl('kuvat2.php')) ?>"><?= t('footer.p_g2') ?></a>
           <a href="<?= e(lurl('kuvat3.php')) ?>"><?= t('footer.p_g3') ?></a>
-          <a href="https://manalasdungeon.lv/viesu_gramata.php"><?= t('footer.p_guestbook') ?></a>
-          <a href="https://manalasdungeon.lv/celojums.php">Ceļojums pa Latviju</a>
-          <a href="https://manalasdungeon.lv/privatums.php<?= $lang === 'lv' ? '' : '?lang=' . $lang ?>"><?= t('footer.p_privacy') ?></a>
+          <a href="https://manalasdungeon.lv/viesu_gramata"><?= t('footer.p_guestbook') ?></a>
+          <a href="https://manalasdungeon.lv/celojums">Ceļojums pa Latviju</a>
+          <a href="https://manalasdungeon.lv/privatums<?= $lang === 'lv' ? '' : '?lang=' . $lang ?>"><?= t('footer.p_privacy') ?></a>
         </div>
       </div>
       <div class="lv-footer__bottom">

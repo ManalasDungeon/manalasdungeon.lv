@@ -43,9 +43,9 @@ $q = $lang === SITE_DEFAULT_LANG ? '' : '?lang=' . $lang;
     <p class="nf-lead"><?= h($T['lead']) ?></p>
     <p><a class="nf-btn" href="/<?= h($q) ?>"><?= h($T['home']) ?> →</a></p>
     <nav class="nf-links" aria-label="<?= h($T['title']) ?>">
-      <a href="/blogi.php<?= h($q) ?>"><?= h($T['news']) ?></a>
-      <a href="/vidzeme.php<?= h($q) ?>"><?= h($T['vidz']) ?></a>
-      <a href="/viesu_gramata.php<?= h($q) ?>"><?= h($T['guest']) ?></a>
+      <a href="/blogi<?= h($q) ?>"><?= h($T['news']) ?></a>
+      <a href="/vidzeme<?= h($q) ?>"><?= h($T['vidz']) ?></a>
+      <a href="/viesu_gramata<?= h($q) ?>"><?= h($T['guest']) ?></a>
     </nav>
     <p class="nf-langs">
       <?php foreach (SITE_LANGS as $lg): if ($lg === $lang) { continue; } ?>

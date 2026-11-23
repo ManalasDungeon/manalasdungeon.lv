@@ -20,11 +20,11 @@ $langname = ['lv' => 'Latviešu', 'en' => 'English', 'fi' => 'Suomi'];
               <a class="dropdown-item" href="https://www.limbazunovads.lv/lv">Limbaži</a>
               <a class="dropdown-item" href="https://www.tuja.lv/">Tūja</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="https://manalasdungeon.lv/celojums.php">Ceļojums pa Latviju</a>
+              <a class="dropdown-item" href="https://manalasdungeon.lv/celojums">Ceļojums pa Latviju</a>
             </div>
           </li>
           <li class="nav-item"><a class="nav-link" href="https://latvija.lv/ParPortalu/Info_lapa"><?= t('nav.latvia') ?></a></li>
-          <li class="nav-item"><a class="nav-link lv-nav__cta" href="https://manalasdungeon.lv/viesu_gramata.php"><?= t('nav.guestbook') ?></a></li>
+          <li class="nav-item"><a class="nav-link lv-nav__cta" href="https://manalasdungeon.lv/viesu_gramata"><?= t('nav.guestbook') ?></a></li>
           <li class="nav-item dropdown lv-lang">
             <a class="nav-link dropdown-toggle lv-lang__toggle" href="#" id="langDrop" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="lv-lang__flag"><?= $langflag[$lang] ?></span> <?= strtoupper($lang) ?>

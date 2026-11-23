@@ -101,19 +101,19 @@ $vitrupeUrl = $base . 'vitrupe/' . ($lang === $default ? '' : $lang . '/');
 /* [id GA4:lle, otsikko, alarivi, osoite, ikoni, ulkoinen?] */
 $GROUPS = [
   $T['g_work'] => [
-    ['portfolio', $T['portfolio'], $T['portfolio_sub'], $base . 'portfolio.php' . $q, 'case', false],
+    ['portfolio', $T['portfolio'], $T['portfolio_sub'], $base . 'portfolio' . $q, 'case', false],
     ['linkedin',  'LinkedIn',      $T['linkedin_sub'],  'https://www.linkedin.com/in/manalainen', 'in', true],
     ['github',    'GitHub',        $T['github_sub'],    'https://github.com/ManalasDungeon', 'git', true],
   ],
   $T['g_site'] => [
     ['home',     $T['home'],    $T['home_sub'],    $base . $q,                    'home',  false],
-    ['blog',     $T['blog'],    $T['blog_sub'],    $base . 'blogi.php' . $q,      'news',  false],
-    ['vidzeme',  $T['vidzeme'], $T['vidzeme_sub'], $base . 'vidzeme.php' . $q,    'map',   false],
-    ['yoga',     $T['yoga'],    $T['yoga_sub'],    $base . 'joga.php' . $q,       'lotus', false],
+    ['blog',     $T['blog'],    $T['blog_sub'],    $base . 'blogi' . $q,      'news',  false],
+    ['vidzeme',  $T['vidzeme'], $T['vidzeme_sub'], $base . 'vidzeme' . $q,    'map',   false],
+    ['yoga',     $T['yoga'],    $T['yoga_sub'],    $base . 'joga' . $q,       'lotus', false],
     ['vitrupe',  $T['vitrupe'], $T['vitrupe_sub'], $vitrupeUrl,                   'wave',  false],
     ['birdgame', $T['bird'],    $T['bird_sub'],    $base . 'birdgame/',           'bird',  false],
     ['library',  $T['lib'],     $T['lib_sub'],     $base . 'verkkokirjasto/',     'lib',   false],
-    ['guestbook',$T['guest'],   $T['guest_sub'],   $base . 'viesu_gramata.php' . $q, 'pen', false],
+    ['guestbook',$T['guest'],   $T['guest_sub'],   $base . 'viesu_gramata' . $q, 'pen', false],
   ],
 ];
 $ogImage = $base . 'images/linkit_og.jpg';

@@ -15,7 +15,7 @@ if (!in_array($lang, $supported, true)) { $lang = $default; }
 $base    = 'https://manalasdungeon.lv/';
 $homeUrl = $base . ($lang === $default ? '' : '?lang=' . $lang);   // paluu etusivulle samalla kielellä
 
-function jg_url(string $lg): string { return page_url('joga.php', $lg); }
+function jg_url(string $lg): string { return page_url('joga', $lg); }
 
 $STUDIO = [
     'site'   => 'https://www.asana-asema.fi/',

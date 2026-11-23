@@ -255,13 +255,13 @@ $C = [
 ];
 $T = $C[$lang];
 
-function pf_url(string $lg): string { return page_url('portfolio.php', $lg); }
+function pf_url(string $lg): string { return page_url('portfolio', $lg); }
 $q          = $lang === $default ? '' : '?lang=' . $lang;
 $homeUrl    = $base . $q;
 $vitrupeUrl = $base . 'vitrupe/' . ($lang === $default ? '' : $lang . '/');
-$vidzemeUrl = $base . 'vidzeme.php' . $q;
-$jogaUrl    = $base . 'joga.php' . $q;
-$archUrl    = $base . 'arhitektura.php' . $q;
+$vidzemeUrl = $base . 'vidzeme' . $q;
+$jogaUrl    = $base . 'joga' . $q;
+$archUrl    = $base . 'arhitektura' . $q;
 $ogImage    = $base . 'images/portfolio_linkedin.jpg';   // baseline-JPEG, uusi nimi ohittaa LinkedInin välimuistin
 
 $ld = [

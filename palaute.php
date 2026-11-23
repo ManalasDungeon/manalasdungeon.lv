@@ -190,7 +190,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 /* ---- Oma sivu (ilman JavaScriptiä tai suora osoite) ---- */
 $csrf    = issue_token();
 $homeUrl = 'https://manalasdungeon.lv/' . ($lang === 'lv' ? '' : '?lang=' . $lang);
-$guest   = '<a href="viesu_gramata.php' . ($lang === 'lv' ? '' : '?lang=' . $lang) . '">' . h($P['guest_in']) . '</a>';
+$guest   = '<a href="viesu_gramata' . ($lang === 'lv' ? '' : '?lang=' . $lang) . '">' . h($P['guest_in']) . '</a>';
 $fieldErr = fn(string $k) => isset($errors[$k]) ? '<p class="fb-err" id="fb-err-' . $k . '">' . h($errors[$k]) . '</p>' : '';
 ?>
 <!DOCTYPE html>
@@ -216,7 +216,7 @@ $fieldErr = fn(string $k) => isset($errors[$k]) ? '<p class="fb-err" id="fb-err-
                 <h1 class="fb-title"><?= h($P['title']) ?></h1>
                 <p class="fb-lead"><?= h($P['lead']) ?></p>
                 <?= isset($errors['_']) ? '<p class="fb-err fb-err--top" role="alert">' . h($errors['_']) . '</p>' : '' ?>
-                <form class="fb-form" method="post" action="palaute.php" novalidate>
+                <form class="fb-form" method="post" action="palaute" novalidate>
                     <input type="hidden" name="csrf" value="<?= h($csrf) ?>">
                     <input type="hidden" name="lang" value="<?= h($lang) ?>">
                     <div class="fb-hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>

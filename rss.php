@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/includes/bootstrap.php';   // yhteiset apufunktiot, turvaotsakkeet
 /**
- * RSS 2.0 -syöte uutisille (Ziņas). Osoite: https://manalasdungeon.lv/rss.php
+ * RSS 2.0 -syöte uutisille (Ziņas). Osoite: https://manalasdungeon.lv/rss
  * 20 uusinta julkaistua uutista, koko teksti kuvineen. Linkit osoittavat blogi.php-sivun
  * kyseiseen uutiseen (#zina-ID). Luonnoksia ja matkablogin merkintöjä ei näytetä.
  */
@@ -39,13 +39,13 @@ echo '<?xml version="1.0" encoding="UTF-8"?>', "\n";
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
   <title>Manas ziņas — Manalas Dungeon</title>
-  <link><?= x(SITE_URL . 'blogi.php') ?></link>
-  <atom:link href="<?= x(SITE_URL . 'rss.php') ?>" rel="self" type="application/rss+xml"/>
+  <link><?= x(SITE_URL . 'blogi') ?></link>
+  <atom:link href="<?= x(SITE_URL . 'rss') ?>" rel="self" type="application/rss+xml"/>
   <description>Marko Nakari (Mana) — jaunumi un pieraksti no Heinolas un Vidzemes.</description>
   <language>lv</language>
   <lastBuildDate><?= $last->format(DATE_RSS) ?></lastBuildDate>
 <?php foreach ($rows as $r):
-    $url  = SITE_URL . 'blogi.php#zina-' . (int)$r['id'];
+    $url  = SITE_URL . 'blogi#zina-' . (int)$r['id'];
     $date = new DateTimeImmutable($r['izveidots'], $tz); ?>
   <item>
     <title><?= x($r['virsraksts']) ?></title>
