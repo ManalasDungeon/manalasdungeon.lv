@@ -5,7 +5,8 @@ declare(strict_types=1);
  *
  * SIJOITUS: kotikansioon verkkojuuren ULKOPUOLELLE, esim. ~/varmuuskopio/varmuuskopio.php
  *           (ei public_html:ään — tiedostoa ei saa voida ajaa selaimesta).
- * AJO:      vain komentoriviltä (cron). Selaimesta tai verkosta ajettuna se lopettaa heti.
+ * AJO:      vain komentoriviltä (cron), myös CGI-versiolla. Selaimesta ajettuna se lopettaa heti.
+ *           Cron-komento: php -q ~/varmuuskopio/varmuuskopio.php   (-q jättää CGI-otsakkeet pois)
  * TULOS:    ~/varmuuskopiot/manalas-VVVV-KK-PP.sql.gz  (oikeudet 600, vain sinä voit lukea)
  *           Säilyttää uusimmat KEEP kappaletta, vanhemmat poistetaan.
  *
@@ -13,9 +14,19 @@ declare(strict_types=1);
  * Palautus: cPanel → phpMyAdmin → Tuo (Import) → valitse .sql.gz-tiedosto.
  */
 
-if (PHP_SAPI !== 'cli') {
+// Vain komentorivi/cron. Palvelimen cron voi ajaa `php`-komennolla CGI-version (PHP_SAPI = cgi-fcgi),
+// joten pelkkä PHP_SAPI-tarkistus esti myös oikean cron-ajon. Selainpyynnön tunnistaa
+// verkkopalvelimen asettamista muuttujista (REQUEST_METHOD / REMOTE_ADDR).
+if (PHP_SAPI !== 'cli' && (isset($_SERVER['REQUEST_METHOD']) || isset($_SERVER['REMOTE_ADDR']))) {
     http_response_code(404);
     exit;
+}
+
+// STDERR-vakio on olemassa vain CLI-versiossa; CGI-ajossa virheet kirjoitetaan php://stderr-virtaan.
+function virhe(string $viesti): never {
+    $e = defined('STDERR') ? STDERR : fopen('php://stderr', 'w');
+    fwrite($e, $viesti . "\n");
+    exit(1);
 }
 
 const KEEP = 8;                                    // montako viimeisintä varmuuskopiota säilytetään
@@ -25,14 +36,12 @@ $dbConfig  = getenv('MANALA_DB_CONFIG') ?: $home . '/public_html/db_config.php';
 $outDir    = getenv('MANALA_BACKUP_DIR') ?: $home . '/varmuuskopiot';
 
 if (!is_file($dbConfig)) {
-    fwrite(STDERR, "db_config.php puuttuu: $dbConfig\n");
-    exit(1);
+    virhe("db_config.php puuttuu: $dbConfig");
 }
 require $dbConfig;
 
 if (!is_dir($outDir) && !mkdir($outDir, 0700, true)) {
-    fwrite(STDERR, "Kansiota ei voitu luoda: $outDir\n");
-    exit(1);
+    virhe("Kansiota ei voitu luoda: $outDir");
 }
 @chmod($outDir, 0700);
 
@@ -41,8 +50,7 @@ $file = $outDir . '/manalas-' . date('Y-m-d') . '.sql.gz';
 $tmp  = $file . '.tmp';
 $gz   = gzopen($tmp, 'wb6');
 if ($gz === false) {
-    fwrite(STDERR, "Tiedostoa ei voitu avata: $tmp\n");
-    exit(1);
+    virhe("Tiedostoa ei voitu avata: $tmp");
 }
 
 $out = static function (string $s) use ($gz): void { gzwrite($gz, $s); };
