@@ -61,7 +61,7 @@ $T = [
     'l_priv' => 'Privātums', 'l_guest' => 'Viesu grāmata',               'l_guest_sub' => 'Atstāj savu ierakstu',
     'l_vidzeme' => 'Piedzīvo Vidzemi',          'l_vidzeme_sub' => 'Cēsis, Salacgrīva un apkārtne',
     'detail_btn'    => 'Atvērt lapu',
-    'l_yoga'  => 'Joga',  'l_yoga_title' => 'Joga — vēsture, filozofija un vinyasa',
+    'l_yoga'  => 'Joga',  'l_yoga_title' => 'Joga — vēsture, filozofija, Core joga un vinyasa',
     'contact' => 'Kontaktinformācija',
   ],
   'en' => [
@@ -77,7 +77,7 @@ $T = [
     'l_priv' => 'Privacy', 'l_guest' => 'Guestbook',                    'l_guest_sub' => 'Leave a message',
     'l_vidzeme' => 'Experience Vidzeme',         'l_vidzeme_sub' => 'Cēsis, Salacgrīva & the coast',
     'detail_btn'    => 'Open the page',
-    'l_yoga'  => 'Yoga',  'l_yoga_title' => 'Yoga — history, philosophy and Vinyasa',
+    'l_yoga'  => 'Yoga',  'l_yoga_title' => 'Yoga — history, philosophy, Core yoga and Vinyasa',
     'contact' => 'Contact',
   ],
   'fi' => [
@@ -93,7 +93,7 @@ $T = [
     'l_priv' => 'Tietosuoja', 'l_guest' => 'Vieraskirja',                 'l_guest_sub' => 'Jätä terveiset',
     'l_vidzeme' => 'Koe elämyksiä',             'l_vidzeme_sub' => 'Cēsis, Salacgrīva ja muu Vidzeme',
     'detail_btn'    => 'Siirry sivulle',
-    'l_yoga'  => 'Jooga', 'l_yoga_title' => 'Jooga — historia, filosofia ja vinyasa',
+    'l_yoga'  => 'Jooga', 'l_yoga_title' => 'Jooga — historia, filosofia, Core-jooga ja vinyasa',
     'contact' => 'Yhteystiedot',
   ],
 ];

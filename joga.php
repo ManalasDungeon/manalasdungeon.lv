@@ -27,12 +27,12 @@ $STUDIO = [
 $TT = [
   'lv' => [
     'loc'     => 'lv_LV',
-    'title'   => 'Joga — vēsture, filozofija un vinyasa | Manalas Dungeon',
-    'desc'    => 'Jogas vēsture un filozofija — un galvenokārt vinyasa, dinamiskā joga, ko praktizēju Heinolas jogas studijā Asana-asema.',
+    'title'   => 'Joga — vēsture, filozofija, Core joga un vinyasa | Manalas Dungeon',
+    'desc'    => 'Jogas vēsture un filozofija — un galvenokārt Core joga, mana pašreizējā mīļākā, kā arī dinamiskā vinyasa, ko praktizēju Heinolas jogas studijā Asana-asema.',
     'back'    => 'Sākums',
     'eyebrow' => 'Elpa · kustība · klātbūtne',
     'h1'      => 'Joga',
-    'lead'    => 'Jogas vēsture un filozofija — un galvenokārt vinyasa, dinamiskā joga, ko praktizēju Heinolas jogas studijā Asana-asema.',
+    'lead'    => 'Jogas vēsture un filozofija — un galvenokārt Core joga, mana pašreizējā mīļākā, kā arī dinamiskā vinyasa, ko praktizēju Heinolas jogas studijā Asana-asema.',
     'nav'     => ['history' => 'Vēsture', 'philosophy' => 'Filozofija', 'vinyasa' => 'Vinyasa', 'core' => 'Core', 'studio' => 'Asana-asema'],
     'photo_alt' => 'Marko gaisa jogas nodarbībā studijā Asana-asema, Heinolā',
     'credit'  => 'Uzņemts studijā Asana-asema, Heinolā',
@@ -66,9 +66,9 @@ $TT = [
       ['Samādhi', 'Iegrimšana, vienotība'],
     ],
 
-    'h_vinyasa' => 'Vinyasa — mana joga',
+    'h_vinyasa' => 'Vinyasa — plūstošā prakse',
     'vinyasa_p' => [
-      'Tagad galvenokārt praktizēju dinamisko jogu — vinyasa jogu. Sanskrita vārds vinyāsa nozīmē „novietot īpašā veidā”: katra pozīcija apzināti seko iepriekšējai, un elpa vada kustību. Ieelpa atver un paceļ, izelpa noliec un nolaiž.',
+      'Līdzās Core jogai praktizēju dinamisko jogu — vinyasa jogu. Sanskrita vārds vinyāsa nozīmē „novietot īpašā veidā”: katra pozīcija apzināti seko iepriekšējai, un elpa vada kustību. Ieelpa atver un paceļ, izelpa noliec un nolaiž.',
       'Dinamiskajā jogā pozās ilgi neuzkavējas — tās savieno vienā plūstošā kustībā. Prakse sasilda ķermeni, veido spēku, kustīgumu un līdzsvaru, un, kad uzmanība paliek pie elpas, prāts nomierinās pat kustībā.',
       'Vinyasa cēlusies no Krišnamačarjas un Patabhi Džoisa Aštangas, taču atšķirībā no Aštangas noteiktās secības vinyasa flow nodarbībā kārtība mainās. Tāpēc katra nodarbība ir mazliet citāda.',
     ],
@@ -146,12 +146,12 @@ $TT = [
 
   'en' => [
     'loc'     => 'en_US',
-    'title'   => 'Yoga — history, philosophy and Vinyasa | Manalas Dungeon',
-    'desc'    => 'The history and philosophy of yoga — and above all Vinyasa, the dynamic yoga I practice at the Asana-asema studio in Heinola.',
+    'title'   => 'Yoga — history, philosophy, Core yoga and Vinyasa | Manalas Dungeon',
+    'desc'    => 'The history and philosophy of yoga — and above all Core yoga, my current favourite, along with dynamic Vinyasa, both of which I practice at the Asana-asema studio in Heinola.',
     'back'    => 'Home',
     'eyebrow' => 'Breath · movement · presence',
     'h1'      => 'Yoga',
-    'lead'    => 'The history and philosophy of yoga — and above all Vinyasa, the dynamic yoga I practice at the Asana-asema studio in Heinola.',
+    'lead'    => 'The history and philosophy of yoga — and above all Core yoga, my current favourite, along with dynamic Vinyasa, both of which I practice at the Asana-asema studio in Heinola.',
     'nav'     => ['history' => 'History', 'philosophy' => 'Philosophy', 'vinyasa' => 'Vinyasa', 'core' => 'Core', 'studio' => 'Asana-asema'],
     'photo_alt' => 'Marko in an aerial yoga class at Asana-asema, Heinola',
     'credit'  => 'Taken at Asana-asema, Heinola',
@@ -185,9 +185,9 @@ $TT = [
       ['Samadhi', 'Absorption, oneness'],
     ],
 
-    'h_vinyasa' => 'Vinyasa — my yoga',
+    'h_vinyasa' => 'Vinyasa — the flowing practice',
     'vinyasa_p' => [
-      'These days I mainly practice dynamic yoga — Vinyasa. The Sanskrit word vinyāsa means “to place in a special way”: each pose follows the last with intention, and the breath carries the movement. The inhale opens and lifts; the exhale folds and lowers.',
+      'Alongside Core yoga I practice dynamic yoga — Vinyasa. The Sanskrit word vinyāsa means “to place in a special way”: each pose follows the last with intention, and the breath carries the movement. The inhale opens and lifts; the exhale folds and lowers.',
       'In dynamic yoga you don’t linger in the poses; they are linked into one smooth flow. The practice warms the body and builds strength, mobility and balance — and when your attention stays on the breath, the mind settles even in motion.',
       'Vinyasa grew out of the Ashtanga of Krishnamacharya and Pattabhi Jois, but unlike Ashtanga’s fixed sequence, the order changes from one Vinyasa flow class to the next — so every class is a little different.',
     ],
@@ -265,12 +265,12 @@ $TT = [
 
   'fi' => [
     'loc'     => 'fi_FI',
-    'title'   => 'Jooga – historia, filosofia ja vinyasa | Manalas Dungeon',
-    'desc'    => 'Joogan historia ja filosofia – ja ennen kaikkea vinyasa, dynaaminen jooga, jota harrastan heinolalaisella Asana-asemalla.',
+    'title'   => 'Jooga – historia, filosofia, Core-jooga ja vinyasa | Manalas Dungeon',
+    'desc'    => 'Joogan historia ja filosofia – ja ennen kaikkea Core-jooga, tämänhetkinen suosikkini, sekä dynaaminen vinyasa, joita harrastan heinolalaisella Asana-asemalla.',
     'back'    => 'Etusivu',
     'eyebrow' => 'Hengitys · liike · läsnäolo',
     'h1'      => 'Jooga',
-    'lead'    => 'Joogan historiaa ja filosofiaa – ja ennen kaikkea vinyasa, dynaaminen jooga, jota harrastan heinolalaisella Asana-asemalla.',
+    'lead'    => 'Joogan historiaa ja filosofiaa – ja ennen kaikkea Core-jooga, tämänhetkinen suosikkini, sekä dynaaminen vinyasa, joita harrastan heinolalaisella Asana-asemalla.',
     'nav'     => ['history' => 'Historia', 'philosophy' => 'Filosofia', 'vinyasa' => 'Vinyasa', 'core' => 'Core', 'studio' => 'Asana-asema'],
     'photo_alt' => 'Marko ilmajoogatunnilla Asana-asemalla Heinolassa',
     'credit'  => 'Kuvattu Asana-asemalla Heinolassa',
@@ -304,9 +304,9 @@ $TT = [
       ['Samādhi', 'Uppoutuminen, ykseys'],
     ],
 
-    'h_vinyasa' => 'Vinyasa – minun joogani',
+    'h_vinyasa' => 'Vinyasa – virtaava harjoitus',
     'vinyasa_p' => [
-      'Nykyään harjoittelen ennen kaikkea dynaamista joogaa, vinyasaa. Sanskritin vinyāsa tarkoittaa ”asettamista erityisellä tavalla”: jokainen asento seuraa edellistä tietoisesti, ja hengitys kuljettaa liikettä. Sisäänhengitys avaa ja nostaa, uloshengitys taivuttaa ja laskee.',
+      'Core-joogan rinnalla harjoittelen dynaamista joogaa, vinyasaa. Sanskritin vinyāsa tarkoittaa ”asettamista erityisellä tavalla”: jokainen asento seuraa edellistä tietoisesti, ja hengitys kuljettaa liikettä. Sisäänhengitys avaa ja nostaa, uloshengitys taivuttaa ja laskee.',
       'Dynaamisessa joogassa asentoihin ei jäädä pitkäksi aikaa, vaan ne liitetään toisiinsa sujuvaksi virraksi. Harjoitus lämmittää kehon ja rakentaa voimaa, liikkuvuutta ja tasapainoa – ja kun huomio pysyy hengityksessä, mieli rauhoittuu liikkeen keskellä.',
       'Vinyasa juontuu Krishnamacharyan ja Pattabhi Joisin Ashtangasta, mutta toisin kuin Ashtangan kiinteässä sarjassa, vinyasa flow -tunnilla järjestys vaihtelee. Siksi jokainen tunti on vähän erilainen.',
     ],
